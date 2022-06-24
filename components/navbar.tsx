@@ -106,7 +106,6 @@ const NavbarActionsItem = styled.li``;
 const MobileMenu = styled.ul<menuProps>`
   position: relative;
   transition: max-height 300ms ease-in;
-
   max-height: ${(props) => (props.open ? "100vh" : "0px")};
   top: 0;
   left: 0;

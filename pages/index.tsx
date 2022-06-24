@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { Button } from "@mantine/core";
 const Wrapper = styled.div`
   position: relative;
   height: auto;
@@ -37,7 +37,7 @@ const BannerContent = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: space-evenly;
-  align-items: center;
+  /* align-items: center; */
   gap: 10px;
   @media only screen and (max-width: 900px) {
     display: flex;
@@ -62,7 +62,11 @@ const BannerContent = styled.div`
     margin: 40px 0px;
   }
   .image > img {
-    max-width: 500px;
+    max-width: 800px;
+    object-fit: cover;
+    @media only screen and (max-width: 700px) {
+      max-width: 450px;
+    }
   }
 `;
 
@@ -91,7 +95,7 @@ const Home = () => {
             <h1>Manage All Of Your Stuff Using A Pakap</h1>
             <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id tincidunt eifend odio viverra diam aliquet donec again.</div>
             <div className="btn-group">
-              <button>Learn More</button>
+              <Button size={"md"}>Learn more</Button>
             </div>
           </div>
 
