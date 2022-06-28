@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Navbar from "./navbar";
 const LayoutWrapper = styled.div`
   position: relative;
+
+  min-height: 100vh;
 `;
 
 interface propsType {
@@ -10,14 +12,18 @@ interface propsType {
 }
 const Body = styled.div`
   position: relative;
+  padding: 20px 0%;
 `;
 const Footer = styled.div`
   position: relative;
-  height: 40px;
-  width: 100%;
+  min-height: 100px;
   bottom: 0;
-  background-color: black;
+  width: 100%;
+  background-color: #555555;
   color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Layout = (props: propsType) => {
@@ -27,7 +33,7 @@ const Layout = (props: propsType) => {
     <LayoutWrapper>
       <Navbar></Navbar>
       <Body>{children}</Body>
-      {/* <Footer>Footer</Footer> */}
+      <Footer>Footer</Footer>
     </LayoutWrapper>
   );
 };

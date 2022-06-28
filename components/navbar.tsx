@@ -13,7 +13,6 @@ interface menuProps {
 const Wrapper = styled.div`
   position: absolute;
   height: 100%;
-  outline: 1px black solid;
   width: 100%;
 `;
 
@@ -24,10 +23,10 @@ const NavbarWrapper = styled.div`
   right: 0;
   /* border: 2px solid black; */
   height: 70px;
-  z-index: 300;
-  color: black;
-  background: transparent;
-  border: 2px solid white;
+  z-index: 500;
+  color: #000;
+  background: #f8f1f1;
+
   /* overflow: hidden; */
   /* overflow: hidden; */
 `;
@@ -40,7 +39,7 @@ const BurgerBtn = styled.div`
 
 const NavbarContent = styled.div`
   position: relative;
-  width: 95%;
+  width: 90%;
   margin: 0 auto;
   height: 100%;
   display: flex;
@@ -80,7 +79,6 @@ const NavbarMenuItem = styled.li`
     text-decoration: none;
     display: block;
     /* color: ${(props) => props.theme.secondary}; */
-    color: #000;
     transition: color 200ms;
   }
   @media only screen and (max-width: 700px) {
@@ -111,7 +109,7 @@ const MobileMenu = styled.ul<menuProps>`
   left: 0;
   right: 0;
   margin: 0;
-  /* padding: 20px 0; */
+
   display: flex;
   flex-direction: column;
   list-style: none;
@@ -146,7 +144,7 @@ const Navbar = () => {
           </BurgerBtn>
           <NavbarBrand>
             <Link href="/">
-              <a>Brand</a>
+              <a>Website Brand</a>
             </Link>
           </NavbarBrand>
           <NavbarMenu open={opened}>
@@ -179,6 +177,12 @@ const Navbar = () => {
                 <ShoppingCart />
               </ActionIcon>
             </NavbarActionsItem>
+
+            {/* <NavbarActionsItem>
+              <ActionIcon variant="transparent" color={"cyan"}>
+                <ShoppingCart />
+              </ActionIcon>
+            </NavbarActionsItem> */}
           </NavbarActions>
         </NavbarContent>
         <MobileMenu open={opened}>
