@@ -19,8 +19,8 @@ const Footer = styled.div`
   min-height: 100px;
   bottom: 0;
   width: 100%;
-  background-color: #555555;
-  color: #fff;
+  background-color: #f6f6f6;
+  color: #868686;
   display: flex;
   justify-content: center;
   align-items: center;

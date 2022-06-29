@@ -7,19 +7,25 @@ import { useViewportSize } from "@mantine/hooks";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Pagination } from "swiper";
 
+import CarouselProducts from "../components/carouselProducts";
+
 import CardProduct from "../components/card/product";
+import { productInterface } from "../utils/interfaces/product/productInterface";
 
 interface ticketItemProps {
   accentColor?: string;
 }
+interface topBrandsProps {
+  background?: string;
+}
+
 const Wrapper = styled.div`
   position: relative;
-
   min-height: 100vh;
   padding-top: 50px;
   /* min-height: 100vh; */
   /* margin: 80% auto; */
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
   /* height: 200vh; */
 `;
@@ -127,11 +133,13 @@ const Gallery = styled.div`
 `;
 const TopBrands = styled.div`
   .topBrand-title {
+    font-weight: 600;
     padding: 20px;
     text-align: center;
+    font-size: 28px;
   }
 `;
-const TopBrandItem = styled.div`
+const TopBrandItem = styled.div<topBrandsProps>`
   height: 220px;
   width: 100%;
   border: 2px solid #e9e7e7;
@@ -139,16 +147,31 @@ const TopBrandItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background: ${(props) => (props.background ? props.background : "transparent")};
 `;
 
 const BestSale = styled.div`
   padding: 20px 0;
   .title {
+    font-size: 28px;
+    font-weight: 600;
     text-align: center;
     padding: 20px 0;
   }
 `;
-const HotProducts = styled.div``;
+const HotProducts = styled.div`
+  padding: 20px 0;
+  .title {
+    font-weight: 600;
+    font-size: 28px;
+    text-align: center;
+    padding: 20px 0;
+  }
+`;
+
+const SaleOffBanner = styled.div`
+  padding: 20px 0;
+`;
 
 const Home = () => {
   const [opened, setOpened] = useState(true);
@@ -169,6 +192,42 @@ const Home = () => {
       </div>
     );
   };
+
+  const productsObject: productInterface[] = [
+    {
+      name: "CUONG",
+      image: "/cat.png",
+      price: "100đ",
+    },
+    {
+      name: "PHY",
+      image: "/cat.png",
+    },
+    {
+      name: "CUONG",
+      image: "/cat.png",
+    },
+    {
+      name: "PHY",
+      image: "/cat.png",
+    },
+    {
+      name: "CUONG",
+      image: "/cat.png",
+    },
+    {
+      name: "PHY",
+      image: "/cat.png",
+    },
+    {
+      name: "CUONG",
+      image: "/cat.png",
+    },
+    {
+      name: "PHY",
+      image: "/cat.png",
+    },
+  ];
 
   return (
     <Wrapper>
@@ -240,23 +299,23 @@ const Home = () => {
         <div className="topBrand-title">TOP BRANDS</div>
         <Grid>
           <Grid.Col md={3} sm={6}>
-            <TopBrandItem>
-              <Image src="/corgi.png" height={80} width={80}></Image>
+            <TopBrandItem background={"#f7ee25"}>
+              <Image src="/me0.png" height={100} width={100}></Image>
             </TopBrandItem>
           </Grid.Col>
           <Grid.Col md={3} sm={6}>
             <TopBrandItem>
-              <Image src="/corgi.png" height={80} width={80}></Image>
+              <Image src="/corgi.png" height={100} width={100}></Image>
             </TopBrandItem>
           </Grid.Col>
           <Grid.Col md={3} sm={6}>
             <TopBrandItem>
-              <Image src="/corgi.png" height={80} width={80}></Image>
+              <Image src="/corgi.png" height={100} width={100}></Image>
             </TopBrandItem>
           </Grid.Col>
           <Grid.Col md={3} sm={6}>
             <TopBrandItem>
-              <Image src="/corgi.png" height={80} width={80}></Image>
+              <Image src="/corgi.png" height={100} width={100}></Image>
             </TopBrandItem>
           </Grid.Col>
         </Grid>
@@ -265,52 +324,23 @@ const Home = () => {
       <BestSale>
         <div className="title">Today's Best Sale</div>
         <div className="content">
-          <Swiper
-            pagination={{
-              clickable: true,
-            }}
-            modules={[EffectFade, Navigation, Pagination]}
-            spaceBetween={50}
-            breakpoints={{
-              640: {
-                slidesPerView: 1,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 2,
-                spaceBetween: 40,
-              },
-              1200: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-              },
-              1600: {
-                slidesPerView: 4,
-                spaceBetween: 40,
-              },
-            }}
-            slidesPerView={1}
-            onSlideChange={() => console.log("slide change")}
-            onSwiper={(swiper) => console.log(swiper)}
-          >
-            <SwiperSlide>
-              <CardProduct></CardProduct>
-            </SwiperSlide>
-            <SwiperSlide>
-              <CardProduct></CardProduct>
-            </SwiperSlide>
-            <SwiperSlide>
-              <CardProduct></CardProduct>
-            </SwiperSlide>
-            <SwiperSlide>
-              <CardProduct></CardProduct>
-            </SwiperSlide>
-            <SwiperSlide>
-              <CardProduct></CardProduct>
-            </SwiperSlide>
-          </Swiper>
+          <CarouselProducts products={productsObject}></CarouselProducts>
         </div>
       </BestSale>
+
+      <HotProducts>
+        <div className="title">Hot Products</div>
+        <div className="content">
+          <CarouselProducts products={productsObject}></CarouselProducts>
+        </div>
+      </HotProducts>
+
+      <SaleOffBanner>
+        <Grid>
+          <Grid.Col md={6}>1</Grid.Col>
+          <Grid.Col md={6}>2</Grid.Col>
+        </Grid>
+      </SaleOffBanner>
     </Wrapper>
   );
 };

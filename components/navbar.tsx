@@ -5,7 +5,7 @@ import { ActionIcon, Burger } from "@mantine/core";
 import { ShoppingCart } from "tabler-icons-react";
 import { useState } from "react";
 import { useViewportSize } from "@mantine/hooks";
-
+import Image from "next/image";
 interface menuProps {
   open: boolean;
 }
@@ -92,7 +92,11 @@ const NavbarMenuItem = styled.li`
   }
 `;
 
-const NavbarBrand = styled.div``;
+const NavbarBrand = styled.div`
+  /* border: 2px solid black; */
+
+  margin-left: 10px;
+`;
 const NavbarActions = styled.ul`
   list-style: none;
   display: flex;
@@ -109,7 +113,6 @@ const MobileMenu = styled.ul<menuProps>`
   left: 0;
   right: 0;
   margin: 0;
-
   display: flex;
   flex-direction: column;
   list-style: none;
@@ -144,7 +147,9 @@ const Navbar = () => {
           </BurgerBtn>
           <NavbarBrand>
             <Link href="/">
-              <a>Website Brand</a>
+              <a>
+                <Image src="/logo.png" height={50} width={50}></Image>
+              </a>
             </Link>
           </NavbarBrand>
           <NavbarMenu open={opened}>

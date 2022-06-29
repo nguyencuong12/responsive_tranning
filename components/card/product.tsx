@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { ActionIcon } from "@mantine/core";
 import { ShoppingCart, ArrowNarrowRight, Heart } from "tabler-icons-react";
+
+import { productInterface } from "../../utils/interfaces/product/productInterface";
 const Wrapper = styled.div`
   position: relative;
   height: 500px;
@@ -12,27 +14,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-
   cursor: pointer;
-  .image {
-    flex-basis: 80%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    img {
-      object-fit: contain;
-      max-height: 50%;
-      width: 90%;
-    }
-  }
-  .title {
-    flex-basis: 10%;
-    border-top: 2px solid #e9e7e7;
-  }
-  .price {
-    flex-basis: 10%;
-  }
+
   .actions {
     /* visibility: hidden;
     transition: opacity 400ms ease-in;
@@ -71,16 +54,51 @@ const Wrapper = styled.div`
   }
 `;
 
-const CardProduct = () => {
+const CardProductImage = styled.div`
+  flex-basis: 80%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    object-fit: contain;
+    max-height: 50%;
+    width: 90%;
+  }
+`;
+const CardProductTitle = styled.div`
+  flex-basis: 10%;
+  border-top: 2px solid #e9e7e7;
+  padding: 20px;
+`;
+const CardProductPrice = styled.div`
+  flex-basis: 10%;
+`;
+const CardProductActions = styled.div``;
+
+const CardProduct = (props: { product: productInterface }) => {
+  const { product } = props;
   return (
-    <Wrapper>
-      <div className="image">
-        <img src="/cat.png"></img>
-      </div>
-      <div className="title">Title</div>
-      <div className="price">Price</div>
+    <Wrapper
+      onClick={() => {
+        console.log("MOVE MOVE");
+      }}
+    >
+      <CardProductImage>
+        <img src={product.image}></img>
+      </CardProductImage>
+      <CardProductTitle>{product.name}</CardProductTitle>
+      <CardProductPrice>{product.price}</CardProductPrice>
       <div className="actions">
-        <ActionIcon color="dark" radius="xl" variant="filled" size={"xl"}>
+        <ActionIcon
+          color="dark"
+          radius="xl"
+          variant="filled"
+          size={"xl"}
+          onClick={() => {
+            console.log("Navigator another page !!!");
+          }}
+        >
           <ArrowNarrowRight />
         </ActionIcon>
         <ActionIcon color="dark" radius="xl" variant="filled" size={"xl"}>
@@ -97,4 +115,3 @@ const CardProduct = () => {
 };
 
 export default CardProduct;
-CardProduct;
