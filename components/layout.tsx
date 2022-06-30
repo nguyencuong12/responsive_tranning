@@ -15,11 +15,15 @@ const Body = styled.div`
   padding: 20px 0%;
 `;
 const Footer = styled.div`
+  margin-top: 50px;
   position: relative;
-  min-height: 100px;
+  min-height: 440px;
   bottom: 0;
   width: 100%;
-  background-color: #f6f6f6;
+  background-color: red;
+  background-image: url("/footer.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #868686;
   display: flex;
   justify-content: center;

@@ -22,7 +22,9 @@ interface topBrandsProps {
 const Wrapper = styled.div`
   position: relative;
   min-height: 100vh;
-  padding-top: 50px;
+  padding-top: 70px;
+  /* margin-top: 400px; */
+  /* background: #f2f2f2; */
   /* min-height: 100vh; */
   /* margin: 80% auto; */
   width: 80%;
@@ -170,7 +172,91 @@ const HotProducts = styled.div`
 `;
 
 const SaleOffBanner = styled.div`
+  padding: 50px 0;
+  position: relative;
+`;
+const SaleOffBannerItem = styled.div`
+  border-radius: 5px;
+  background-image: url("/saleBanner.webp");
+  height: 280px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 100px;
+  overflow: hidden;
+`;
+
+const Blog = styled.div`
   padding: 20px 0;
+  position: relative;
+  .title {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    padding: 20px 0;
+  }
+`;
+interface blogProps {
+  image?: string;
+  color?: string;
+}
+const BlogItem = styled.div<blogProps>`
+  padding: 10px;
+  border-radius: 10px;
+  min-height: 200px;
+  border: 2px solid #686868;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-image: ${(props) => (props.image ? `url(${props.image})` : null)};
+  /* border: 2px solid #686868; */
+  color: ${(props) => (props.color ? props.color : "#000")};
+  font-size: 18px;
+  font-weight: 600;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  overflow: hidden;
+`;
+const Policy = styled.div`
+  padding: 20px 0;
+  position: relative;
+  .title {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    padding: 20px 0;
+  }
+`;
+interface PolicyItemProps {
+  image?: string;
+  background?: string;
+}
+const PolicyItem = styled.div<PolicyItemProps>`
+  min-height: 250px;
+  max-height: 250px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  .title-policy {
+    padding: 20px 0;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .subtitle-policy {
+    color: #868686;
+    text-align: center;
+  }
+  img {
+    object-fit: cover;
+    height: 60px;
+    width: 60px;
+  }
 `;
 
 const Home = () => {
@@ -193,44 +279,136 @@ const Home = () => {
     );
   };
 
-  const productsObject: productInterface[] = [
-    {
-      name: "CUONG",
-      image: "/cat.png",
-      price: "100đ",
-    },
-    {
-      name: "PHY",
-      image: "/cat.png",
-    },
-    {
-      name: "CUONG",
-      image: "/cat.png",
-    },
-    {
-      name: "PHY",
-      image: "/cat.png",
-    },
-    {
-      name: "CUONG",
-      image: "/cat.png",
-    },
-    {
-      name: "PHY",
-      image: "/cat.png",
-    },
-    {
-      name: "CUONG",
-      image: "/cat.png",
-    },
-    {
-      name: "PHY",
-      image: "/cat.png",
-    },
-  ];
+  function PolicyRender() {
+    return (
+      <Policy>
+        <div className="title">POLICY</div>
+        <div className="content">
+          <Grid>
+            <Grid.Col md={3}>
+              <PolicyItem>
+                <img src="/delivery.png"></img>
+                <div className="title-policy">Free Same-Day Delivery</div>
+                <div className="subtitle-policy">Order by 2pm local time to get free delivery on orders $35+ today.</div>
+              </PolicyItem>
+            </Grid.Col>
+            <Grid.Col md={3}>
+              <PolicyItem>
+                <img src="/exchange.png"></img>
+                <div className="title-policy">30 Day Return</div>
+                <div className="subtitle-policy">35% off your first order plus 5% off all future orders.</div>
+              </PolicyItem>
+            </Grid.Col>
+            <Grid.Col md={3}>
+              <PolicyItem>
+                <img src="/shield.png"></img>
+                <div className="title-policy">Security payment</div>
+                <div className="subtitle-policy">25% off your online order of $50+. Available at most locations.</div>
+              </PolicyItem>
+            </Grid.Col>
+            <Grid.Col md={3}>
+              <PolicyItem>
+                <img src="/support.png"></img>
+                <div className="title-policy">24/7 Support</div>
+                <div className="subtitle-policy">Shop online to get orders over $35 shipped fast and free.</div>
+              </PolicyItem>
+            </Grid.Col>
+          </Grid>
+        </div>
+      </Policy>
+    );
+  }
+  function TopBrandRender() {
+    return (
+      <TopBrands>
+        <div className="topBrand-title">TOP BRANDS</div>
+        <Grid>
+          <Grid.Col md={3} sm={6}>
+            <TopBrandItem background={"#f7ee25"}>
+              <Image src="/me0.png" height={100} width={100}></Image>
+            </TopBrandItem>
+          </Grid.Col>
+          <Grid.Col md={3} sm={6}>
+            <TopBrandItem>
+              <Image src="/corgi.png" height={100} width={100}></Image>
+            </TopBrandItem>
+          </Grid.Col>
+          <Grid.Col md={3} sm={6}>
+            <TopBrandItem>
+              <Image src="/corgi.png" height={100} width={100}></Image>
+            </TopBrandItem>
+          </Grid.Col>
+          <Grid.Col md={3} sm={6}>
+            <TopBrandItem>
+              <Image src="/corgi.png" height={100} width={100}></Image>
+            </TopBrandItem>
+          </Grid.Col>
+        </Grid>
+      </TopBrands>
+    );
+  }
+  function BestSaleRender() {
+    return (
+      <BestSale>
+        <div className="title">Today's Best Sale</div>
+        <div className="content">
+          <CarouselProducts products={productsObject}></CarouselProducts>
+        </div>
+      </BestSale>
+    );
+  }
+  function SaleOffBannerRender() {
+    return (
+      <SaleOffBanner>
+        <Grid>
+          <Grid.Col md={6}>
+            <SaleOffBannerItem>SALE OFF ITEM</SaleOffBannerItem>
+          </Grid.Col>
+          <Grid.Col md={6}>
+            <SaleOffBannerItem>SALE OFF ITEM</SaleOffBannerItem>
+          </Grid.Col>
+        </Grid>
+      </SaleOffBanner>
+    );
+  }
+  function BlogRender() {
+    return (
+      <Blog>
+        <div className="title">Blogs</div>
+        <div className="content">
+          <Grid>
+            <Grid.Col md={3} sm={6}>
+              <BlogItem image={"/food-cat.png"} color={"blue"}>
+                Test
+              </BlogItem>
+            </Grid.Col>
+            <Grid.Col md={3} sm={6}>
+              <BlogItem image={"/care.png"}>Knowledge Take Care</BlogItem>
+            </Grid.Col>
+            <Grid.Col md={3} sm={6}>
+              <BlogItem image={"/health.png"}>About Heal</BlogItem>
+            </Grid.Col>
+            <Grid.Col md={3} sm={6}>
+              <BlogItem image={"/disease.png"}>Common disease</BlogItem>
+            </Grid.Col>
+          </Grid>
+        </div>
+      </Blog>
+    );
+  }
 
-  return (
-    <Wrapper>
+  function HotProductsRender() {
+    return (
+      <HotProducts>
+        <div className="title">Hot Products</div>
+        <div className="content">
+          <CarouselProducts products={productsObject}></CarouselProducts>
+        </div>
+      </HotProducts>
+    );
+  }
+  function BannerRender() {
+    return (
       <Banner justify={"center"}>
         <Grid.Col className="banner-ctx-left" md={3} sm={6} xs={12}>
           <Category>
@@ -295,52 +473,54 @@ const Home = () => {
           </Ticket>
         </Grid.Col>
       </Banner>
-      <TopBrands>
-        <div className="topBrand-title">TOP BRANDS</div>
-        <Grid>
-          <Grid.Col md={3} sm={6}>
-            <TopBrandItem background={"#f7ee25"}>
-              <Image src="/me0.png" height={100} width={100}></Image>
-            </TopBrandItem>
-          </Grid.Col>
-          <Grid.Col md={3} sm={6}>
-            <TopBrandItem>
-              <Image src="/corgi.png" height={100} width={100}></Image>
-            </TopBrandItem>
-          </Grid.Col>
-          <Grid.Col md={3} sm={6}>
-            <TopBrandItem>
-              <Image src="/corgi.png" height={100} width={100}></Image>
-            </TopBrandItem>
-          </Grid.Col>
-          <Grid.Col md={3} sm={6}>
-            <TopBrandItem>
-              <Image src="/corgi.png" height={100} width={100}></Image>
-            </TopBrandItem>
-          </Grid.Col>
-        </Grid>
-      </TopBrands>
+    );
+  }
 
-      <BestSale>
-        <div className="title">Today's Best Sale</div>
-        <div className="content">
-          <CarouselProducts products={productsObject}></CarouselProducts>
-        </div>
-      </BestSale>
+  const productsObject: productInterface[] = [
+    {
+      name: "CUONG",
+      image: "/cat.png",
+      price: "100đ",
+    },
+    {
+      name: "PHY",
+      image: "/cat.png",
+    },
+    {
+      name: "CUONG",
+      image: "/cat.png",
+    },
+    {
+      name: "PHY",
+      image: "/cat.png",
+    },
+    {
+      name: "CUONG",
+      image: "/cat.png",
+    },
+    {
+      name: "PHY",
+      image: "/cat.png",
+    },
+    {
+      name: "CUONG",
+      image: "/cat.png",
+    },
+    {
+      name: "PHY",
+      image: "/cat.png",
+    },
+  ];
 
-      <HotProducts>
-        <div className="title">Hot Products</div>
-        <div className="content">
-          <CarouselProducts products={productsObject}></CarouselProducts>
-        </div>
-      </HotProducts>
-
-      <SaleOffBanner>
-        <Grid>
-          <Grid.Col md={6}>1</Grid.Col>
-          <Grid.Col md={6}>2</Grid.Col>
-        </Grid>
-      </SaleOffBanner>
+  return (
+    <Wrapper>
+      <BannerRender></BannerRender>
+      <TopBrandRender></TopBrandRender>
+      <HotProductsRender></HotProductsRender>
+      <BestSaleRender></BestSaleRender>
+      <SaleOffBannerRender></SaleOffBannerRender>
+      <PolicyRender></PolicyRender>
+      <BlogRender></BlogRender>
     </Wrapper>
   );
 };
