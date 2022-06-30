@@ -22,7 +22,7 @@ interface topBrandsProps {
 const Wrapper = styled.div`
   position: relative;
   min-height: 100vh;
-  padding-top: 70px;
+  padding-top: 50px;
   /* margin-top: 400px; */
   /* background: #f2f2f2; */
   /* min-height: 100vh; */
@@ -207,19 +207,24 @@ const BlogItem = styled.div<blogProps>`
   padding: 10px;
   border-radius: 10px;
   min-height: 200px;
-  border: 2px solid #686868;
+
+  background: #898989;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   background-image: ${(props) => (props.image ? `url(${props.image})` : null)};
   /* border: 2px solid #686868; */
-  color: ${(props) => (props.color ? props.color : "#000")};
+  color: ${(props) => (props.color ? props.color : "#fff")};
   font-size: 18px;
   font-weight: 600;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   overflow: hidden;
+  img {
+    overflow: hidden;
+  }
 `;
 const Policy = styled.div`
   padding: 20px 0;
@@ -378,18 +383,29 @@ const Home = () => {
         <div className="content">
           <Grid>
             <Grid.Col md={3} sm={6}>
-              <BlogItem image={"/food-cat.png"} color={"blue"}>
-                Test
+              <BlogItem>
+                <Image src="/food-cat.png" height={120} width={120}></Image>
+                <p>Cat Foods</p>
               </BlogItem>
             </Grid.Col>
             <Grid.Col md={3} sm={6}>
-              <BlogItem image={"/care.png"}>Knowledge Take Care</BlogItem>
+              <BlogItem>
+                <Image src="/care.png" height={120} width={120}></Image>
+                <p>Knowledge Care</p>
+              </BlogItem>
             </Grid.Col>
             <Grid.Col md={3} sm={6}>
-              <BlogItem image={"/health.png"}>About Heal</BlogItem>
+              <BlogItem>
+                <Image src="/health.png" height={120} width={120}></Image>
+                <p>Health</p>
+              </BlogItem>
             </Grid.Col>
             <Grid.Col md={3} sm={6}>
-              <BlogItem image={"/disease.png"}>Common disease</BlogItem>
+              {/* <BlogItem image={"/disease.png"}>Common disease</BlogItem> */}
+              <BlogItem>
+                <Image src="/disease.png" height={120} width={120}></Image>
+                <p>Disease</p>
+              </BlogItem>
             </Grid.Col>
           </Grid>
         </div>
@@ -410,7 +426,7 @@ const Home = () => {
   function BannerRender() {
     return (
       <Banner justify={"center"}>
-        <Grid.Col className="banner-ctx-left" md={3} sm={6} xs={12}>
+        <Grid.Col className="banner-ctx-left" md={3} sm={12} xs={12}>
           <Category>
             <div className="category-title">
               <div className="title-content">Category</div>
@@ -460,7 +476,7 @@ const Home = () => {
             </Swiper>
           </Gallery>
         </Grid.Col>
-        <Grid.Col className="banner-ctx-right" md={3} sm={6} xs={12}>
+        <Grid.Col className="banner-ctx-right" md={3} sm={12} xs={12}>
           <Ticket>
             <TicketItem>
               <div className="ticket-accent">from $20.0</div>
