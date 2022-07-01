@@ -5,6 +5,7 @@ import { ActionIcon, Burger } from "@mantine/core";
 import { ShoppingCart } from "tabler-icons-react";
 import { useState } from "react";
 import { useViewportSize } from "@mantine/hooks";
+import { NavMenu } from "../data/navbar/menu";
 import Image from "next/image";
 interface menuProps {
   open: boolean;
@@ -54,8 +55,7 @@ const NavbarMenu = styled.ul<menuProps>`
   align-items: center;
   padding: 20px 0px;
   transition: left 300ms ease-in;
-
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 800px) {
     position: absolute;
     top: 54px;
     width: 100%;
@@ -74,10 +74,11 @@ const NavbarMenu = styled.ul<menuProps>`
   }
 `;
 const NavbarMenuItem = styled.li`
-  padding: 5px 25px;
+  padding: 10px 25px;
   a {
     text-decoration: none;
     display: block;
+
     /* color: ${(props) => props.theme.secondary}; */
     transition: color 200ms;
   }
@@ -86,7 +87,7 @@ const NavbarMenuItem = styled.li`
     margin: 0;
     width: 100%;
     * {
-      color: black !important;
+      color: white !important;
       border-bottom: 1px solid #ccc;
     }
   }
@@ -104,10 +105,11 @@ const NavbarActions = styled.ul`
   align-items: center;
 `;
 const NavbarActionsItem = styled.li``;
-
 const MobileMenu = styled.ul<menuProps>`
+  transition: opacity 300ms;
+  opacity: ${(props) => (props.open ? 1 : 0)};
   position: relative;
-  transition: max-height 300ms ease-in;
+  visibility: ${(props) => (props.open ? "visible" : "hidden")};
   max-height: ${(props) => (props.open ? "100vh" : "0px")};
   top: 0;
   left: 0;
@@ -116,13 +118,10 @@ const MobileMenu = styled.ul<menuProps>`
   display: flex;
   flex-direction: column;
   list-style: none;
-  background: #fff;
+  background: #2a292e;
+  padding: 40px;
+  /* border-radius: 5px; */
   overflow: hidden;
-`;
-const MobileMenuItem = styled.li`
-  margin: 0;
-  padding: 0;
-  padding: 10px;
 `;
 
 const Navbar = () => {
@@ -138,6 +137,32 @@ const Navbar = () => {
     }
   }, [width]);
 
+  function RenderNavbarMenu(): JSX.Element {
+    return (
+      <>
+        {NavMenu.map((element) => (
+          <NavbarMenuItem key={element.title}>
+            <Link href={element.href}>
+              <a>{element.title}</a>
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </>
+    );
+  }
+  function RenderNavbarMenuMobile(): JSX.Element {
+    return (
+      <>
+        {NavMenu.map((element) => (
+          <NavbarMenuItem key={element.title}>
+            <Link href={element.href}>
+              <a>{element.title}</a>
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </>
+    );
+  }
   return (
     <Wrapper>
       <NavbarWrapper>
@@ -153,26 +178,7 @@ const Navbar = () => {
             </Link>
           </NavbarBrand>
           <NavbarMenu open={opened}>
-            <NavbarMenuItem>
-              <Link href="/">
-                <a>Home</a>
-              </Link>
-            </NavbarMenuItem>
-            <NavbarMenuItem>
-              <Link href="/">
-                <a>About Us</a>
-              </Link>
-            </NavbarMenuItem>
-            <NavbarMenuItem>
-              <Link href="/">
-                <a>Shop</a>
-              </Link>
-            </NavbarMenuItem>
-            <NavbarMenuItem>
-              <Link href="/">
-                <a>Contact</a>
-              </Link>
-            </NavbarMenuItem>
+            <RenderNavbarMenu />
           </NavbarMenu>
 
           <NavbarActions>
@@ -182,19 +188,10 @@ const Navbar = () => {
                 <ShoppingCart />
               </ActionIcon>
             </NavbarActionsItem>
-
-            {/* <NavbarActionsItem>
-              <ActionIcon variant="transparent" color={"cyan"}>
-                <ShoppingCart />
-              </ActionIcon>
-            </NavbarActionsItem> */}
           </NavbarActions>
         </NavbarContent>
         <MobileMenu open={opened}>
-          <MobileMenuItem>Home</MobileMenuItem>
-          <MobileMenuItem>About Us</MobileMenuItem>
-          <MobileMenuItem>Home</MobileMenuItem>
-          <MobileMenuItem>About Us</MobileMenuItem>
+          <RenderNavbarMenuMobile></RenderNavbarMenuMobile>
         </MobileMenu>
       </NavbarWrapper>
     </Wrapper>

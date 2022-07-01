@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { ActionIcon } from "@mantine/core";
 import { ShoppingCart, ArrowNarrowRight, Heart } from "tabler-icons-react";
-
+import { useRouter } from "next/router";
 import { productInterface } from "../../utils/interfaces/product/productInterface";
 const Wrapper = styled.div`
   position: relative;
@@ -78,10 +78,13 @@ const CardProductActions = styled.div``;
 
 const CardProduct = (props: { product: productInterface }) => {
   const { product } = props;
+  const router = useRouter();
+
   return (
     <Wrapper
       onClick={() => {
         console.log("MOVE MOVE");
+        router.push("/product");
       }}
     >
       <CardProductImage>

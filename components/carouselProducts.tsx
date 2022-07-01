@@ -4,11 +4,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Navigation, Pagination } from "swiper";
 import { productInterface } from "../utils/interfaces/product/productInterface";
 import CardProduct from "./card/product";
+import { v4 as uuidv4 } from "uuid";
 
 const Wrapper = styled.div``;
 const CarouselProducts = (props: { products: productInterface[] }) => {
   const { products } = props;
-
   return (
     <Wrapper>
       <Swiper
@@ -36,13 +36,10 @@ const CarouselProducts = (props: { products: productInterface[] }) => {
           },
         }}
         slidesPerView={1}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
       >
         {products.map((product) => {
-          //   return <h1>{product.name}</h1>;
           return (
-            <SwiperSlide>
+            <SwiperSlide key={uuidv4()}>
               <CardProduct product={product}></CardProduct>
             </SwiperSlide>
           );

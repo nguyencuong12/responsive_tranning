@@ -58,3 +58,20 @@ a {
   max-height:450px;
   object-fit:cover;
 }
+.mySwiper {
+  height: 100px;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.mySwiper .swiper-slide {
+  width: 25%;
+  height: 100%;
+ 
+  
+
+}
+/* 
+.mySwiper .swiper-slide-thumb-active {
+  opacity: 1;
+} */

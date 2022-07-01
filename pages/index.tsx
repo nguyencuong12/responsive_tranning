@@ -10,7 +10,10 @@ import { EffectFade, Navigation, Pagination } from "swiper";
 import CarouselProducts from "../components/carouselProducts";
 
 import CardProduct from "../components/card/product";
+
+import { HomeRender } from "../data/home/render/home";
 import { productInterface } from "../utils/interfaces/product/productInterface";
+import { CategoryData } from "../data/category/category";
 
 interface ticketItemProps {
   accentColor?: string;
@@ -22,7 +25,7 @@ interface topBrandsProps {
 const Wrapper = styled.div`
   position: relative;
   min-height: 100vh;
-  padding-top: 50px;
+
   /* margin-top: 400px; */
   /* background: #f2f2f2; */
   /* min-height: 100vh; */
@@ -78,6 +81,8 @@ const Category = styled.div`
       cursor: pointer;
       padding: 0 20px;
       transition: 200ms ease color;
+      font-size: 16px;
+      font-weight: 600;
       div {
         margin-left: 20px;
       }
@@ -207,7 +212,6 @@ const BlogItem = styled.div<blogProps>`
   padding: 10px;
   border-radius: 10px;
   min-height: 200px;
-
   background: #898989;
   display: flex;
   flex-direction: column;
@@ -257,11 +261,11 @@ const PolicyItem = styled.div<PolicyItemProps>`
     color: #868686;
     text-align: center;
   }
-  img {
+  /* img {
     object-fit: cover;
     height: 60px;
     width: 60px;
-  }
+  } */
 `;
 
 const Home = () => {
@@ -278,7 +282,7 @@ const Home = () => {
   const renderCategoryItems = (image: string, title: string) => {
     return (
       <div className="category-item-content">
-        <Image src={image} height={35} width={35}></Image>
+        <Image src={image} height={35} width={35} alt="category"></Image>
         <div>{title}</div>
       </div>
     );
@@ -289,36 +293,7 @@ const Home = () => {
       <Policy>
         <div className="title">POLICY</div>
         <div className="content">
-          <Grid>
-            <Grid.Col md={3}>
-              <PolicyItem>
-                <img src="/delivery.png"></img>
-                <div className="title-policy">Free Same-Day Delivery</div>
-                <div className="subtitle-policy">Order by 2pm local time to get free delivery on orders $35+ today.</div>
-              </PolicyItem>
-            </Grid.Col>
-            <Grid.Col md={3}>
-              <PolicyItem>
-                <img src="/exchange.png"></img>
-                <div className="title-policy">30 Day Return</div>
-                <div className="subtitle-policy">35% off your first order plus 5% off all future orders.</div>
-              </PolicyItem>
-            </Grid.Col>
-            <Grid.Col md={3}>
-              <PolicyItem>
-                <img src="/shield.png"></img>
-                <div className="title-policy">Security payment</div>
-                <div className="subtitle-policy">25% off your online order of $50+. Available at most locations.</div>
-              </PolicyItem>
-            </Grid.Col>
-            <Grid.Col md={3}>
-              <PolicyItem>
-                <img src="/support.png"></img>
-                <div className="title-policy">24/7 Support</div>
-                <div className="subtitle-policy">Shop online to get orders over $35 shipped fast and free.</div>
-              </PolicyItem>
-            </Grid.Col>
-          </Grid>
+          <HomeRender.policyItemRender />
         </div>
       </Policy>
     );
@@ -327,35 +302,14 @@ const Home = () => {
     return (
       <TopBrands>
         <div className="topBrand-title">TOP BRANDS</div>
-        <Grid>
-          <Grid.Col md={3} sm={6}>
-            <TopBrandItem background={"#f7ee25"}>
-              <Image src="/me0.png" height={100} width={100}></Image>
-            </TopBrandItem>
-          </Grid.Col>
-          <Grid.Col md={3} sm={6}>
-            <TopBrandItem>
-              <Image src="/corgi.png" height={100} width={100}></Image>
-            </TopBrandItem>
-          </Grid.Col>
-          <Grid.Col md={3} sm={6}>
-            <TopBrandItem>
-              <Image src="/corgi.png" height={100} width={100}></Image>
-            </TopBrandItem>
-          </Grid.Col>
-          <Grid.Col md={3} sm={6}>
-            <TopBrandItem>
-              <Image src="/corgi.png" height={100} width={100}></Image>
-            </TopBrandItem>
-          </Grid.Col>
-        </Grid>
+        <HomeRender.popularBrand></HomeRender.popularBrand>
       </TopBrands>
     );
   }
   function BestSaleRender() {
     return (
       <BestSale>
-        <div className="title">Today's Best Sale</div>
+        <div className="title">Today Best Sale</div>
         <div className="content">
           <CarouselProducts products={productsObject}></CarouselProducts>
         </div>
@@ -381,33 +335,7 @@ const Home = () => {
       <Blog>
         <div className="title">Blogs</div>
         <div className="content">
-          <Grid>
-            <Grid.Col md={3} sm={6}>
-              <BlogItem>
-                <Image src="/food-cat.png" height={120} width={120}></Image>
-                <p>Cat Foods</p>
-              </BlogItem>
-            </Grid.Col>
-            <Grid.Col md={3} sm={6}>
-              <BlogItem>
-                <Image src="/care.png" height={120} width={120}></Image>
-                <p>Knowledge Care</p>
-              </BlogItem>
-            </Grid.Col>
-            <Grid.Col md={3} sm={6}>
-              <BlogItem>
-                <Image src="/health.png" height={120} width={120}></Image>
-                <p>Health</p>
-              </BlogItem>
-            </Grid.Col>
-            <Grid.Col md={3} sm={6}>
-              {/* <BlogItem image={"/disease.png"}>Common disease</BlogItem> */}
-              <BlogItem>
-                <Image src="/disease.png" height={120} width={120}></Image>
-                <p>Disease</p>
-              </BlogItem>
-            </Grid.Col>
-          </Grid>
+          <HomeRender.blogItemRender></HomeRender.blogItemRender>
         </div>
       </Blog>
     );
@@ -435,23 +363,28 @@ const Home = () => {
                   opened={opened}
                   size={"sm"}
                   onClick={(e) => {
+                    console.log("CALL");
                     setOpened(!opened);
                   }}
                 />
               </div>
             </div>
             <Collapse in={opened}>
-              <div className="category-item">
-                <Link href="/">{renderCategoryItems("/cat.png", "Cat")}</Link>
-              </div>
-              <div className="category-item">
-                <Link href="/">
-                  <div className="category-item-content">
-                    <Image src="/cat-food.png" height={35} width={35}></Image>
-                    <div>TEXT</div>
+              {CategoryData.map((instance) => {
+                return (
+                  <div className="category-item" key={instance.id}>
+                    <Link href={instance.href}>
+                      <div className="category-item-content">
+                        <Image src={instance.image} alt="image" height={32} width={32}></Image>
+                        <div>{instance.title}</div>
+                      </div>
+                    </Link>
                   </div>
-                </Link>
-              </div>
+                );
+              })}
+              {/* <div className="category-item">
+                <Link href="/">{renderCategoryItems("/cat.png", "Cat")}</Link>
+              </div> */}
             </Collapse>
           </Category>
         </Grid.Col>
@@ -464,8 +397,6 @@ const Home = () => {
               modules={[EffectFade, Navigation, Pagination]}
               spaceBetween={50}
               slidesPerView={1}
-              onSlideChange={() => console.log("slide change")}
-              onSwiper={(swiper) => console.log(swiper)}
             >
               <SwiperSlide>
                 <img src="https://swiperjs.com/demos/images/nature-1.jpg" />

@@ -1,18 +1,21 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 import Navbar from "./navbar";
+import { FooterData } from "../data/footer/footerData";
+import { Grid } from "@mantine/core";
+import Image from "next/image";
+import { Location, Phone } from "tabler-icons-react";
 const LayoutWrapper = styled.div`
   position: relative;
-
   min-height: 100vh;
 `;
-
 interface propsType {
   children: ReactNode;
 }
 const Body = styled.div`
   position: relative;
-  padding: 20px 0%;
+  min-height: 50vh;
+  padding: 100px 0%;
 `;
 const Footer = styled.div`
   margin-top: 50px;
@@ -26,8 +29,82 @@ const Footer = styled.div`
   background-size: cover;
   color: #868686;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  padding-top: 210px;
+  /* justify-content: center;
+  align-items: center; */
+`;
+
+const FooterTop = styled.div`
+  /* height: 400px; */
+  min-height: 300px;
+  /* margin: 10px 0px; */
+  position: relative;
+  border-bottom: 1px solid #686868;
+`;
+const FooterBottom = styled.div`
+  /* border: 1px solid red; */
+  position: relative;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  /* border: 2px solid black;
+  position: absolute;
+  bottom: 0;
+  width: 100%; */
+`;
+const FooterBottomContent = styled.div`
+  padding: 10px 20px;
+  width: 80%;
+  margin: 0 auto;
+  /* display: flex;
+  justify-content: space-between; */
+  font-size: 12px;
+`;
+
+const FooterTopContent = styled.div`
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
+`;
+const FooterTopItems = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  .footer-items {
+    padding: 10px 0px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .location,
+  .phone {
+    padding: 10px 0px;
+    color: #fff !important;
+    display: flex;
+
+    width: 100%;
+    div {
+      margin-left: 10px;
+    }
+  }
+
+  .social-media {
+    padding: 10px 0px;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-evenly; */
+    width: 100%;
+    img {
+      /* :first-child {
+        padding: 0 !important;
+      } */
+      padding: 0 5px !important;
+    }
+  }
 `;
 
 const Layout = (props: propsType) => {
@@ -37,7 +114,81 @@ const Layout = (props: propsType) => {
     <LayoutWrapper>
       <Navbar></Navbar>
       <Body>{children}</Body>
-      <Footer>Footer</Footer>
+      <Footer>
+        <FooterTop>
+          <FooterTopContent>
+            <Grid>
+              <Grid.Col md={3}>
+                <FooterTopItems>
+                  <Image alt="image" src={FooterData.introduce.logo} height={60} width={60} objectFit={"contain"}></Image>
+                  <div className="footer-items">{FooterData.introduce.question}</div>
+                  <div className="location">
+                    <Location></Location>
+                    <div>{FooterData.introduce.location}</div>
+                  </div>
+                  <div className="phone">
+                    <Phone></Phone>
+                    <div>{FooterData.introduce.phone}</div>
+                  </div>
+                  <div className="social-media">
+                    {FooterData.introduce.socialMedia.map((element) => {
+                      return (
+                        <div key={element.id}>
+                          <Image src={element.image} height={35} width={35}></Image>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </FooterTopItems>
+              </Grid.Col>
+              <Grid.Col md={3}>
+                <FooterTopItems>
+                  <h3 style={{ color: "#fff" }}>Corporate</h3>
+                  {FooterData.corporate.map((instance) => {
+                    return (
+                      <span key={instance.id} className="footer-items">
+                        {instance.title}
+                      </span>
+                    );
+                  })}
+                </FooterTopItems>
+              </Grid.Col>
+              <Grid.Col md={3}>
+                <FooterTopItems>
+                  <h3 style={{ color: "#fff" }}>Custom Service</h3>
+                  {FooterData.customService.map((instance) => {
+                    return (
+                      <span key={instance.id} className="footer-items">
+                        {instance.title}
+                      </span>
+                    );
+                  })}
+                </FooterTopItems>
+              </Grid.Col>
+              <Grid.Col md={3}>
+                <FooterTopItems>
+                  <h3 style={{ color: "#fff" }}>Custom Service</h3>
+                  {FooterData.service.map((instance) => {
+                    return (
+                      <span key={instance.id} className="footer-items">
+                        {instance.title}
+                      </span>
+                    );
+                  })}
+                </FooterTopItems>
+              </Grid.Col>
+            </Grid>
+          </FooterTopContent>
+        </FooterTop>
+        <FooterBottom>
+          <FooterBottomContent>
+            <div>© 2022 Sashimeomeo Pets Store</div>
+            <div>
+              <Image src="/payment.png" width={350} height={40} objectFit={"contain"}></Image>
+            </div>
+          </FooterBottomContent>
+        </FooterBottom>
+      </Footer>
     </LayoutWrapper>
   );
 };
