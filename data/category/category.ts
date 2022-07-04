@@ -3,38 +3,38 @@ import { v4 as uuidv4 } from "uuid";
 export const CategoryData = [
   {
     id: uuidv4(),
-    title: "Cat",
+    title: "Cats",
     image: "/cat.png",
-    href: "/",
+    href: "/cats",
   },
   {
     id: uuidv4(),
     title: "Toys",
     image: "/mouse-toy.png",
-    href: "/",
+    href: "/toys",
   },
   {
     id: uuidv4(),
-    title: "Accessory",
+    title: "Accessorys",
     image: "/accessory.png",
-    href: "/",
+    href: "/accessorys",
   },
   {
     id: uuidv4(),
     title: "Foods",
     image: "/food-cat.png",
-    href: "/",
+    href: "/foods",
   },
   {
     id: uuidv4(),
-    title: "Cage",
+    title: "Cages",
     image: "/cage.png",
-    href: "/",
+    href: "/cages",
   },
   {
     id: uuidv4(),
-    title: "Medicin",
-    image: "/medicin.png",
+    title: "Medicins",
+    image: "/medicins.png",
     href: "/",
   },
 ];

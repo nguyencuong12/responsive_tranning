@@ -1,48 +1,35 @@
-import React, { useRef, useState } from "react";
+import React, { useState, useEffect } from "react";
 // Import Swiper React components
-import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
-
-// import required modules
+import { Magnifier } from "react-image-magnifiers";
 import { FreeMode, Navigation, Thumbs } from "swiper";
+import { previewInterface } from "../../utils/interfaces/carousel/previewImage";
+import classes from "classnames";
 
-export default function App() {
+export default function PreviewImage(props: previewInterface) {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
-
+  useEffect(() => {}, [thumbsSwiper]);
+  const { images } = props;
   return (
     <>
-      <Swiper loop={true} spaceBetween={10} navigation={true} thumbs={{ swiper: thumbsSwiper }} modules={[FreeMode, Navigation, Thumbs]} className="mySwiper2">
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </SwiperSlide>
+      <Swiper spaceBetween={10} thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }} modules={[FreeMode, Navigation, Thumbs]} className="mySwiper2">
+        {images.map((instance) => {
+          return (
+            <SwiperSlide key={instance}>
+              <img src={instance} />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
-      <Swiper
-        spaceBetween={10}
-        slidesPerView={4}
-        freeMode={true}
-        watchSlidesProgress={true}
-        modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper"
-        onSwiper={(swiper) => {
-          if (swiper) {
-            setThumbsSwiper(swiper);
-          }
-        }}
-      >
-        {/* ... */}
+      <Swiper onSwiper={setThumbsSwiper} spaceBetween={10} slidesPerView={4} freeMode={true} watchSlidesProgress={true} modules={[FreeMode, Navigation, Thumbs]} className="mySwiper">
+        {images.map((instance) => {
+          return (
+            <SwiperSlide className="thumb-items" key={instance}>
+              <img src={instance} />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </>
   );

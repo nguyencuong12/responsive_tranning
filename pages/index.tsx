@@ -14,6 +14,7 @@ import CardProduct from "../components/card/product";
 import { HomeRender } from "../data/home/render/home";
 import { productInterface } from "../utils/interfaces/product/productInterface";
 import { CategoryData } from "../data/category/category";
+import { ProductAPI } from "../axios/product";
 
 interface ticketItemProps {
   accentColor?: string;
@@ -271,6 +272,21 @@ const PolicyItem = styled.div<PolicyItemProps>`
 const Home = () => {
   const [opened, setOpened] = useState(true);
   const { width } = useViewportSize();
+  useEffect(() => {
+    fetchProductFromPage();
+  }, []);
+  const fetchProductFromPage = async () => {
+    let response = await ProductAPI.getProduct();
+    console.log("repsonse ", response);
+  };
+  const fetchHotProducts = async () => {
+    let response = await ProductAPI.getHotProducts();
+    console.log("repsonse ", response);
+  };
+  const fetchBestSaleProducts = async () => {
+    let response = await ProductAPI.getBestSaleProducts();
+    console.log("repsonse ", response);
+  };
   useEffect(() => {
     if (width <= 768) {
       setOpened(false);

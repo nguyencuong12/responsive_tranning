@@ -83,8 +83,7 @@ const CardProduct = (props: { product: productInterface }) => {
   return (
     <Wrapper
       onClick={() => {
-        console.log("MOVE MOVE");
-        router.push("/product");
+        router.push("/product/:id");
       }}
     >
       <CardProductImage>
@@ -99,7 +98,7 @@ const CardProduct = (props: { product: productInterface }) => {
           variant="filled"
           size={"xl"}
           onClick={() => {
-            console.log("Navigator another page !!!");
+            router.push("/product/:id");
           }}
         >
           <ArrowNarrowRight />

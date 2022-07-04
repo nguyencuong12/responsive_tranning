@@ -5,4 +5,6 @@ export interface productInterface {
   image?: string;
   hashtag?: [];
   sale?: string;
+  colors?: string[];
+  amount?: number;
 }

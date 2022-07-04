@@ -139,7 +139,6 @@ const ProductPage = () => {
               <span className="title-color">Color</span>
               <div className="content">
                 <ActionIcon radius="xl" variant="filled" color={"red"}></ActionIcon>
-
                 <ActionIcon radius="xl" variant="filled" color={"red"}></ActionIcon>
               </div>
             </div>
