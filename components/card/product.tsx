@@ -4,6 +4,8 @@ import { ActionIcon } from "@mantine/core";
 import { ShoppingCart, ArrowNarrowRight, Heart } from "tabler-icons-react";
 import { useRouter } from "next/router";
 import { productInterface } from "../../utils/interfaces/product/productInterface";
+import Image from "next/image";
+
 const Wrapper = styled.div`
   position: relative;
   height: 500px;
@@ -83,11 +85,13 @@ const CardProduct = (props: { product: productInterface }) => {
   return (
     <Wrapper
       onClick={() => {
-        router.push("/product/:id");
+        router.push(`/product/${product._id}`);
       }}
     >
       <CardProductImage>
-        <img src={product.image}></img>
+        <Image src={product.image!.toString()} height={300} width={500} alt="image"></Image>
+
+        {/* <img src={product.image}></img> */}
       </CardProductImage>
       <CardProductTitle>{product.name}</CardProductTitle>
       <CardProductPrice>{product.price}</CardProductPrice>
@@ -98,7 +102,7 @@ const CardProduct = (props: { product: productInterface }) => {
           variant="filled"
           size={"xl"}
           onClick={() => {
-            router.push("/product/:id");
+            router.push(`/product/${product._id}`);
           }}
         >
           <ArrowNarrowRight />

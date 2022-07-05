@@ -7,6 +7,12 @@ export const ProductAPI = {
       url: url,
     });
   },
+  getProductFromID(id: string) {
+    return axios({
+      method: "GET",
+      url: url + `/${id}`,
+    });
+  },
   getHotProducts() {
     return axios({
       method: "POST",

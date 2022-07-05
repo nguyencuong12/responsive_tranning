@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useViewportSize } from "@mantine/hooks";
 import { NavMenu } from "../data/navbar/menu";
 import Image from "next/image";
+import { useRouter } from "next/router";
 interface menuProps {
   open: boolean;
 }
@@ -75,10 +76,11 @@ const NavbarMenu = styled.ul<menuProps>`
 `;
 const NavbarMenuItem = styled.li`
   padding: 10px 25px;
+  font-size: 16px;
+  font-weight: 700;
   a {
     text-decoration: none;
     display: block;
-
     /* color: ${(props) => props.theme.secondary}; */
     transition: color 200ms;
   }
@@ -126,6 +128,8 @@ const MobileMenu = styled.ul<menuProps>`
 
 const Navbar = () => {
   const [opened, setOpened] = useState(false);
+  const router = useRouter();
+
   const _onHandleBurger = () => {
     setOpened(!opened);
   };
@@ -173,7 +177,7 @@ const Navbar = () => {
           <NavbarBrand>
             <Link href="/">
               <a>
-                <Image src="/logo.png" height={50} width={50}></Image>
+                <Image src="/logo.png" height={50} width={50} alt="brand image"></Image>
               </a>
             </Link>
           </NavbarBrand>
@@ -184,7 +188,13 @@ const Navbar = () => {
           <NavbarActions>
             <NavbarActionsItem></NavbarActionsItem>
             <NavbarActionsItem>
-              <ActionIcon variant="transparent" color={"cyan"}>
+              <ActionIcon
+                variant="transparent"
+                color={"cyan"}
+                onClick={() => {
+                  router.push("/cart");
+                }}
+              >
                 <ShoppingCart />
               </ActionIcon>
             </NavbarActionsItem>

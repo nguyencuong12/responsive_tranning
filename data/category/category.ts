@@ -34,7 +34,7 @@ export const CategoryData = [
   {
     id: uuidv4(),
     title: "Medicins",
-    image: "/medicins.png",
-    href: "/",
+    image: "/medicin.png",
+    href: "/medicins",
   },
 ];

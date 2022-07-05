@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 const Wrapper = styled.div``;
 const CarouselProducts = (props: { products: productInterface[] }) => {
   const { products } = props;
+  console.log("PRODUCT", products);
   return (
     <Wrapper>
       <Swiper
@@ -37,13 +38,14 @@ const CarouselProducts = (props: { products: productInterface[] }) => {
         }}
         slidesPerView={1}
       >
-        {products.map((product) => {
-          return (
-            <SwiperSlide key={uuidv4()}>
-              <CardProduct product={product}></CardProduct>
-            </SwiperSlide>
-          );
-        })}
+        {products &&
+          products.map((product) => {
+            return (
+              <SwiperSlide key={uuidv4()}>
+                <CardProduct product={product}></CardProduct>
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
     </Wrapper>
   );

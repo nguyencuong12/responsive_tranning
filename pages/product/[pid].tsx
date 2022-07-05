@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ActionIcon, Grid, Button, Modal } from "@mantine/core";
 import NumberComponent from "../../components/numberComponent";
 import { ArrowsMaximize } from "tabler-icons-react";
 import PreviewSwiper from "../../components/swiper/preview";
 import { previewInterface } from "../../utils/interfaces/carousel/previewImage";
+import { useRouter } from "next/router";
+import { productInterface } from "../../utils/interfaces/product/productInterface";
+import { ProductAPI } from "../../axios/product";
 const Wrapper = styled.div`
   /* border: 2px solid red; */
   height: 100%;
@@ -96,27 +99,32 @@ const ContainerModal = styled.div`
 
 const ProductPage = () => {
   const [open, setOpen] = useState(false);
+  const [product, setProduct] = useState<productInterface>();
+  const [imagePreview, setImagePreview] = useState<string[]>();
   // let cuong: previewInterface = [images:"123"];
-
+  const router = useRouter();
+  const { pid } = router.query;
+  useEffect(() => {
+    if (pid) {
+      getProductFromID(pid.toString());
+    }
+  }, [pid]);
+  useEffect(() => {
+    let temp = previewImages.images;
+    temp.push(product?.image!);
+    setImagePreview(temp);
+  }, [product]);
+  const getProductFromID = async (id: string) => {
+    let response = await ProductAPI.getProductFromID(id);
+    console.log("response", response);
+    setProduct(response.data.product);
+  };
   const previewImages: previewInterface = {
-    images: ["https://swiperjs.com/demos/images/nature-3.jpg", "https://swiperjs.com/demos/images/nature-4.jpg"],
+    images: ["https://swiperjs.com/demos/images/nature-3.jpg"],
   };
 
   return (
     <Wrapper>
-      <CustomModal
-        opened={open}
-        size="calc(100vw - 87px)"
-        centered
-        onClose={() => {
-          setOpen(false);
-        }}
-      >
-        <ContainerModal>
-          <PreviewSwiper images={previewImages.images}></PreviewSwiper>
-        </ContainerModal>
-      </CustomModal>
-
       <Grid>
         <Grid.Col md={6}>
           <ProductItem>
@@ -125,15 +133,12 @@ const ProductPage = () => {
         </Grid.Col>
         <Grid.Col md={6}>
           <ProductItem>
-            <div className="title">CUONG</div>
+            <div className="title">{product?.title}</div>
             <div className="price">
               <span>$40.00 – $45.00</span>
               <span className="tag">-11%</span>
             </div>
-            <div className="description">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur.
-            </div>
+            <div className="description">{product?.description}</div>
 
             <div className="color">
               <span className="title-color">Color</span>

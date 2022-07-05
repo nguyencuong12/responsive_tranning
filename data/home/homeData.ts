@@ -50,6 +50,7 @@ export const HomeData = {
     },
     {
       id: uuidv4(),
+
       image: "/me0.png",
       background: "#595959",
     },

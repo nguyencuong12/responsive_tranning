@@ -189,10 +189,21 @@ const SaleOffBannerItem = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  /* justify-content: flex-start; */
+  /* align-items: center; */
   padding-left: 100px;
   overflow: hidden;
+  color: #fff;
+  .title {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .content {
+    font-size: 24px;
+    font-weight: 600;
+  }
 `;
 
 const Blog = styled.div`
@@ -272,8 +283,10 @@ const PolicyItem = styled.div<PolicyItemProps>`
 const Home = () => {
   const [opened, setOpened] = useState(true);
   const { width } = useViewportSize();
+  const [products, setProducts] = useState<productInterface[]>();
   useEffect(() => {
-    fetchProductFromPage();
+    // fetchProductFromPage();
+    fetchHotProducts();
   }, []);
   const fetchProductFromPage = async () => {
     let response = await ProductAPI.getProduct();
@@ -281,7 +294,7 @@ const Home = () => {
   };
   const fetchHotProducts = async () => {
     let response = await ProductAPI.getHotProducts();
-    console.log("repsonse ", response);
+    setProducts(response.data.products);
   };
   const fetchBestSaleProducts = async () => {
     let response = await ProductAPI.getBestSaleProducts();
@@ -337,10 +350,16 @@ const Home = () => {
       <SaleOffBanner>
         <Grid>
           <Grid.Col md={6}>
-            <SaleOffBannerItem>SALE OFF ITEM</SaleOffBannerItem>
+            <SaleOffBannerItem>
+              <div className="title">20% OFF ALL ITEMS </div>
+              <div className="content">Hot Summer Deals</div>
+            </SaleOffBannerItem>
           </Grid.Col>
           <Grid.Col md={6}>
-            <SaleOffBannerItem>SALE OFF ITEM</SaleOffBannerItem>
+            <SaleOffBannerItem>
+              TOYS, TREATS & LEASHES
+              <div className="content">Now At Wilone</div>
+            </SaleOffBannerItem>
           </Grid.Col>
         </Grid>
       </SaleOffBanner>
@@ -362,7 +381,7 @@ const Home = () => {
       <HotProducts>
         <div className="title">Hot Products</div>
         <div className="content">
-          <CarouselProducts products={productsObject}></CarouselProducts>
+          <CarouselProducts products={products!}></CarouselProducts>
         </div>
       </HotProducts>
     );
@@ -379,7 +398,6 @@ const Home = () => {
                   opened={opened}
                   size={"sm"}
                   onClick={(e) => {
-                    console.log("CALL");
                     setOpened(!opened);
                   }}
                 />
@@ -415,10 +433,10 @@ const Home = () => {
               slidesPerView={1}
             >
               <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                <Image src="https://swiperjs.com/demos/images/nature-1.jpg" layout="fill" alt="image"></Image>
               </SwiperSlide>
               <SwiperSlide>
-                <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                <Image src="https://swiperjs.com/demos/images/nature-2.jpg" layout="fill" alt="image"></Image>
               </SwiperSlide>
             </Swiper>
           </Gallery>

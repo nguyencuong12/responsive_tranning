@@ -134,7 +134,7 @@ const Layout = (props: propsType) => {
                     {FooterData.introduce.socialMedia.map((element) => {
                       return (
                         <div key={element.id}>
-                          <Image src={element.image} height={35} width={35}></Image>
+                          <Image alt="image" src={element.image} height={35} width={35}></Image>
                         </div>
                       );
                     })}
@@ -184,7 +184,7 @@ const Layout = (props: propsType) => {
           <FooterBottomContent>
             <div>© 2022 Sashimeomeo Pets Store</div>
             <div>
-              <Image src="/payment.png" width={350} height={40} objectFit={"contain"}></Image>
+              <Image alt="image" src="/payment.png" width={350} height={40} objectFit={"contain"}></Image>
             </div>
           </FooterBottomContent>
         </FooterBottom>
