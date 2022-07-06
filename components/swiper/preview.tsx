@@ -9,7 +9,7 @@ import Image from "next/image";
 
 export default function PreviewImage(props: previewInterface) {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
-  useEffect(() => {}, [thumbsSwiper]);
+  // useEffect(() => {}, [thumbsSwiper]);
   const { images } = props;
 
   return (
@@ -19,7 +19,7 @@ export default function PreviewImage(props: previewInterface) {
           images.map((instance) => {
             return (
               <SwiperSlide key={instance}>
-                <Image alt="image" src={instance} height={500} width={800} objectFit="fill"></Image>
+                <Image alt="image" src={instance} height={500} width={800} objectFit="contain"></Image>
                 {/* <img src={instance} /> */}
               </SwiperSlide>
             );
@@ -30,7 +30,7 @@ export default function PreviewImage(props: previewInterface) {
           images.map((instance) => {
             return (
               <SwiperSlide className="thumb-items" key={instance}>
-                <Image alt="image" src={instance} height={120} width={120}></Image>
+                <Image alt="image" src={instance} height={60} width={60}></Image>
               </SwiperSlide>
             );
           })}

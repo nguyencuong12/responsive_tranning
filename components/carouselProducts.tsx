@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 const Wrapper = styled.div``;
 const CarouselProducts = (props: { products: productInterface[] }) => {
   const { products } = props;
-  console.log("PRODUCT", products);
+
   return (
     <Wrapper>
       <Swiper

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { ActionIcon, Grid, Button, Modal } from "@mantine/core";
+import { ActionIcon, Grid, Button, Modal, CheckboxGroup, Checkbox, ColorSwatch, Group, useMantineTheme } from "@mantine/core";
 import NumberComponent from "../../components/numberComponent";
 import { ArrowsMaximize } from "tabler-icons-react";
 import PreviewSwiper from "../../components/swiper/preview";
@@ -8,6 +8,7 @@ import { previewInterface } from "../../utils/interfaces/carousel/previewImage";
 import { useRouter } from "next/router";
 import { productInterface } from "../../utils/interfaces/product/productInterface";
 import { ProductAPI } from "../../axios/product";
+import { Check } from "tabler-icons-react";
 const Wrapper = styled.div`
   /* border: 2px solid red; */
   height: 100%;
@@ -98,10 +99,10 @@ const ContainerModal = styled.div`
 `;
 
 const ProductPage = () => {
-  const [open, setOpen] = useState(false);
   const [product, setProduct] = useState<productInterface>();
-  const [imagePreview, setImagePreview] = useState<string[]>();
-  // let cuong: previewInterface = [images:"123"];
+
+  const [colorsChecked, setColorsChecked] = useState<any[]>();
+  const [color, setColor] = useState([{}]);
   const router = useRouter();
   const { pid } = router.query;
   useEffect(() => {
@@ -110,13 +111,22 @@ const ProductPage = () => {
     }
   }, [pid]);
   useEffect(() => {
-    let temp = previewImages.images;
-    temp.push(product?.image!);
-    setImagePreview(temp);
+    if (product?.colors) {
+      product.colors.forEach((value) => {
+        setColor([
+          ...color,
+          {
+            value: value,
+            checked: false,
+          },
+        ]);
+      });
+
+      // console.log("TEMP", tempArr);
+    }
   }, [product]);
   const getProductFromID = async (id: string) => {
     let response = await ProductAPI.getProductFromID(id);
-    console.log("response", response);
     setProduct(response.data.product);
   };
   const previewImages: previewInterface = {
@@ -128,23 +138,40 @@ const ProductPage = () => {
       <Grid>
         <Grid.Col md={6}>
           <ProductItem>
-            <PreviewSwiper images={previewImages.images}></PreviewSwiper>
+            <PreviewSwiper images={product?.image!}></PreviewSwiper>
           </ProductItem>
         </Grid.Col>
         <Grid.Col md={6}>
           <ProductItem>
             <div className="title">{product?.title}</div>
             <div className="price">
-              <span>$40.00 – $45.00</span>
+              <span>{product?.price}</span>
               <span className="tag">-11%</span>
             </div>
             <div className="description">{product?.description}</div>
-
             <div className="color">
               <span className="title-color">Color</span>
               <div className="content">
-                <ActionIcon radius="xl" variant="filled" color={"red"}></ActionIcon>
-                <ActionIcon radius="xl" variant="filled" color={"red"}></ActionIcon>
+                <Group position="center" spacing="xs">
+                  {product &&
+                    product.colors?.map((element) => {
+                      return (
+                        <ColorSwatch
+                          key={element}
+                          component="button"
+                          color={element}
+                          onClick={() => {
+                            console.log("COLOR", color);
+                          }}
+                          style={{ color: "#fff", cursor: "pointer" }}
+                        >
+                          <Check />
+                        </ColorSwatch>
+                      );
+                    })}
+
+                  {/* <ColorSwatch component="a" href="https://mantine.dev" color={theme.colors.blue[6]} /> */}
+                </Group>
               </div>
             </div>
             <div className="actions">

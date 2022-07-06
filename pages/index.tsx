@@ -284,6 +284,7 @@ const Home = () => {
   const [opened, setOpened] = useState(true);
   const { width } = useViewportSize();
   const [products, setProducts] = useState<productInterface[]>();
+  const [hotProducts, setHotProducts] = useState<productInterface[]>();
   useEffect(() => {
     // fetchProductFromPage();
     fetchHotProducts();
@@ -294,7 +295,8 @@ const Home = () => {
   };
   const fetchHotProducts = async () => {
     let response = await ProductAPI.getHotProducts();
-    setProducts(response.data.products);
+    console.log("HOT", response);
+    setHotProducts(response.data.products);
   };
   const fetchBestSaleProducts = async () => {
     let response = await ProductAPI.getBestSaleProducts();
@@ -339,9 +341,7 @@ const Home = () => {
     return (
       <BestSale>
         <div className="title">Today Best Sale</div>
-        <div className="content">
-          <CarouselProducts products={productsObject}></CarouselProducts>
-        </div>
+        <div className="content">{/* <CarouselProducts products={productsObject}></CarouselProducts> */}</div>
       </BestSale>
     );
   }
@@ -381,7 +381,7 @@ const Home = () => {
       <HotProducts>
         <div className="title">Hot Products</div>
         <div className="content">
-          <CarouselProducts products={products!}></CarouselProducts>
+          <CarouselProducts products={hotProducts!}></CarouselProducts>
         </div>
       </HotProducts>
     );
@@ -456,42 +456,6 @@ const Home = () => {
       </Banner>
     );
   }
-
-  const productsObject: productInterface[] = [
-    {
-      name: "CUONG",
-      image: "/cat.png",
-      price: "100đ",
-    },
-    {
-      name: "PHY",
-      image: "/cat.png",
-    },
-    {
-      name: "CUONG",
-      image: "/cat.png",
-    },
-    {
-      name: "PHY",
-      image: "/cat.png",
-    },
-    {
-      name: "CUONG",
-      image: "/cat.png",
-    },
-    {
-      name: "PHY",
-      image: "/cat.png",
-    },
-    {
-      name: "CUONG",
-      image: "/cat.png",
-    },
-    {
-      name: "PHY",
-      image: "/cat.png",
-    },
-  ];
 
   return (
     <Wrapper>

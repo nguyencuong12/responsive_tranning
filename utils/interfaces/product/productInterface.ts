@@ -3,7 +3,7 @@ export interface productInterface {
   name?: string;
   title?: string;
   price?: string;
-  image?: string;
+  image: string[];
   hashtag?: [];
   sale?: string;
   colors?: string[];
