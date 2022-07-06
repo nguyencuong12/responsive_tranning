@@ -125,6 +125,11 @@ const ProductPage = () => {
       // console.log("TEMP", tempArr);
     }
   }, [product]);
+  useEffect(() => {
+    if (colorsChecked) {
+      console.log("CHANGE", colorsChecked);
+    }
+  }, [colorsChecked]);
   const getProductFromID = async (id: string) => {
     let response = await ProductAPI.getProductFromID(id);
     setProduct(response.data.product);
@@ -161,18 +166,19 @@ const ProductPage = () => {
                           component="button"
                           color={element}
                           onClick={() => {
-                            console.log("COLOR", element);
                             colorsChecked?.forEach((instance) => {
                               if (instance.value === element) {
                                 instance.checked = !instance.checked;
+                              } else {
+                                instance.checked = false;
                               }
                             });
+
+                            setColorsChecked([...colorsChecked!]);
                           }}
                           style={{ color: "#fff", cursor: "pointer" }}
                         >
-                          {colorsChecked![index]?.checked && "sqd"}
-                          {/* {colorsChecked![index].checked && <Check />} */}
-                          <Check />
+                          {colorsChecked && colorsChecked![index].checked && <Check />}
                         </ColorSwatch>
                       );
                     })}
