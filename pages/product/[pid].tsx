@@ -102,7 +102,7 @@ const ProductPage = () => {
   const [product, setProduct] = useState<productInterface>();
 
   const [colorsChecked, setColorsChecked] = useState<any[]>();
-  const [color, setColor] = useState([{}]);
+
   const router = useRouter();
   const { pid } = router.query;
   useEffect(() => {
@@ -112,15 +112,15 @@ const ProductPage = () => {
   }, [pid]);
   useEffect(() => {
     if (product?.colors) {
+      let arr: any = [];
+
       product.colors.forEach((value) => {
-        setColor([
-          ...color,
-          {
-            value: value,
-            checked: false,
-          },
-        ]);
+        arr.push({
+          value: value,
+          checked: false,
+        });
       });
+      setColorsChecked(arr);
 
       // console.log("TEMP", tempArr);
     }
@@ -154,17 +154,24 @@ const ProductPage = () => {
               <div className="content">
                 <Group position="center" spacing="xs">
                   {product &&
-                    product.colors?.map((element) => {
+                    product.colors?.map((element, index) => {
                       return (
                         <ColorSwatch
                           key={element}
                           component="button"
                           color={element}
                           onClick={() => {
-                            console.log("COLOR", color);
+                            console.log("COLOR", element);
+                            colorsChecked?.forEach((instance) => {
+                              if (instance.value === element) {
+                                instance.checked = !instance.checked;
+                              }
+                            });
                           }}
                           style={{ color: "#fff", cursor: "pointer" }}
                         >
+                          {colorsChecked![index]?.checked && "sqd"}
+                          {/* {colorsChecked![index].checked && <Check />} */}
                           <Check />
                         </ColorSwatch>
                       );
