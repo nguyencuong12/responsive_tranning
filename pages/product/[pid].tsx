@@ -1,26 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import {
-  ActionIcon,
-  Grid,
-  Button,
-  Modal,
-  CheckboxGroup,
-  Checkbox,
-  ColorSwatch,
-  Group,
-  useMantineTheme,
-} from '@mantine/core';
-import NumberComponent from '../../components/numberComponent';
-import { ArrowsMaximize } from 'tabler-icons-react';
-import PreviewSwiper from '../../components/swiper/preview';
-import { previewInterface } from '../../utils/interfaces/carousel/previewImage';
-import { useRouter } from 'next/router';
-import { productInterface } from '../../utils/interfaces/product/productInterface';
-import { ProductAPI } from '../../axios/product';
-import { Check } from 'tabler-icons-react';
-import { cartItemsInterface } from '../../utils/interfaces/cart/cartItems';
-import { CartStorage } from '../../utils/cartStorage/cartStorage';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { ActionIcon, Grid, Button, Modal, CheckboxGroup, Checkbox, ColorSwatch, Group, useMantineTheme } from "@mantine/core";
+import NumberComponent from "../../components/numberComponent";
+import { ArrowsMaximize } from "tabler-icons-react";
+import PreviewSwiper from "../../components/swiper/preview";
+import { previewInterface } from "../../utils/interfaces/carousel/previewImage";
+import { useRouter } from "next/router";
+import { productInterface } from "../../utils/interfaces/product/productInterface";
+import { ProductAPI } from "../../axios/product";
+import { Check } from "tabler-icons-react";
+import { cartItemsInterface } from "../../utils/interfaces/cart/cartItems";
+import { CartStorage } from "../../utils/cartStorage/cartStorage";
 const Wrapper = styled.div`
   /* border: 2px solid red; */
   height: 100%;
@@ -85,7 +75,7 @@ const ProductImagePreviewTop = styled.div`
   margin: 10px 0;
   border-radius: 5px;
   min-height: 500px;
-  background-image: url('/cat.png');
+  background-image: url("/cat.png");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -124,7 +114,7 @@ const ProductPage = () => {
   useEffect(() => {
     if (product?.colors) {
       let arr: any = [];
-      product.colors.forEach(value => {
+      product.colors.forEach((value) => {
         arr.push({
           value: value,
           checked: false,
@@ -137,16 +127,16 @@ const ProductPage = () => {
   }, [product]);
   useEffect(() => {
     if (colorsChecked) {
-      console.log('CHANGE', colorsChecked);
+      console.log("CHANGE", colorsChecked);
     }
   }, [colorsChecked]);
   const getProductFromID = async (id: string) => {
     let response = await ProductAPI.getProductFromID(id);
-    console.log('response', response);
+    console.log("response", response);
     setProduct(response.data.product);
   };
   const previewImages: previewInterface = {
-    images: ['https://swiperjs.com/demos/images/nature-3.jpg'],
+    images: ["https://swiperjs.com/demos/images/nature-3.jpg"],
   };
 
   return (
@@ -177,7 +167,7 @@ const ProductPage = () => {
                           component="button"
                           color={element}
                           onClick={() => {
-                            colorsChecked?.forEach(instance => {
+                            colorsChecked?.forEach((instance) => {
                               if (instance.value === element) {
                                 instance.checked = !instance.checked;
                               } else {
@@ -187,11 +177,9 @@ const ProductPage = () => {
 
                             setColorsChecked([...colorsChecked!]);
                           }}
-                          style={{ color: '#fff', cursor: 'pointer' }}
+                          style={{ color: "#fff", cursor: "pointer" }}
                         >
-                          {colorsChecked && colorsChecked![index].checked && (
-                            <Check />
-                          )}
+                          {colorsChecked && colorsChecked![index].checked && <Check />}
                         </ColorSwatch>
                       );
                     })}
@@ -214,7 +202,7 @@ const ProductPage = () => {
                 onClick={() => {
                   if (product) {
                     let color: string;
-                    colorsChecked?.forEach(instance => {
+                    colorsChecked?.forEach((instance) => {
                       if (instance.checked == true) {
                         color = instance.value;
                       }
@@ -244,7 +232,8 @@ const ProductPage = () => {
               >
                 Add To Cart
               </Button>
-              <Button
+
+              {/* <Button
                 color="teal"
                 radius="xl"
                 size="sm"
@@ -254,8 +243,9 @@ const ProductPage = () => {
                 }}
               >
                 Buy Now
-              </Button>
-              <Button
+              </Button> */}
+
+              {/* <Button
                 color="teal"
                 radius="xl"
                 size="sm"
@@ -264,7 +254,7 @@ const ProductPage = () => {
                 }}
               >
                 Remove
-              </Button>
+              </Button> */}
             </div>
           </ProductItem>
         </Grid.Col>
