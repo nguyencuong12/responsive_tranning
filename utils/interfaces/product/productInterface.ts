@@ -7,7 +7,7 @@ export interface productInterface {
   hashtag?: [];
   sale?: string;
   colors?: string[];
-  amount?: number;
   description?: string;
   subImage?: string[];
+  color?: string;
 }

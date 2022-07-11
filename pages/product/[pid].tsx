@@ -1,14 +1,26 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { ActionIcon, Grid, Button, Modal, CheckboxGroup, Checkbox, ColorSwatch, Group, useMantineTheme } from "@mantine/core";
-import NumberComponent from "../../components/numberComponent";
-import { ArrowsMaximize } from "tabler-icons-react";
-import PreviewSwiper from "../../components/swiper/preview";
-import { previewInterface } from "../../utils/interfaces/carousel/previewImage";
-import { useRouter } from "next/router";
-import { productInterface } from "../../utils/interfaces/product/productInterface";
-import { ProductAPI } from "../../axios/product";
-import { Check } from "tabler-icons-react";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import {
+  ActionIcon,
+  Grid,
+  Button,
+  Modal,
+  CheckboxGroup,
+  Checkbox,
+  ColorSwatch,
+  Group,
+  useMantineTheme,
+} from '@mantine/core';
+import NumberComponent from '../../components/numberComponent';
+import { ArrowsMaximize } from 'tabler-icons-react';
+import PreviewSwiper from '../../components/swiper/preview';
+import { previewInterface } from '../../utils/interfaces/carousel/previewImage';
+import { useRouter } from 'next/router';
+import { productInterface } from '../../utils/interfaces/product/productInterface';
+import { ProductAPI } from '../../axios/product';
+import { Check } from 'tabler-icons-react';
+import { cartItemsInterface } from '../../utils/interfaces/cart/cartItems';
+import { CartStorage } from '../../utils/cartStorage/cartStorage';
 const Wrapper = styled.div`
   /* border: 2px solid red; */
   height: 100%;
@@ -73,7 +85,7 @@ const ProductImagePreviewTop = styled.div`
   margin: 10px 0;
   border-radius: 5px;
   min-height: 500px;
-  background-image: url("/cat.png");
+  background-image: url('/cat.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -100,9 +112,8 @@ const ContainerModal = styled.div`
 
 const ProductPage = () => {
   const [product, setProduct] = useState<productInterface>();
-
   const [colorsChecked, setColorsChecked] = useState<any[]>();
-
+  const [amountAddingCart, setAmountAddingCart] = useState<number>(0);
   const router = useRouter();
   const { pid } = router.query;
   useEffect(() => {
@@ -113,8 +124,7 @@ const ProductPage = () => {
   useEffect(() => {
     if (product?.colors) {
       let arr: any = [];
-
-      product.colors.forEach((value) => {
+      product.colors.forEach(value => {
         arr.push({
           value: value,
           checked: false,
@@ -127,15 +137,16 @@ const ProductPage = () => {
   }, [product]);
   useEffect(() => {
     if (colorsChecked) {
-      console.log("CHANGE", colorsChecked);
+      console.log('CHANGE', colorsChecked);
     }
   }, [colorsChecked]);
   const getProductFromID = async (id: string) => {
     let response = await ProductAPI.getProductFromID(id);
+    console.log('response', response);
     setProduct(response.data.product);
   };
   const previewImages: previewInterface = {
-    images: ["https://swiperjs.com/demos/images/nature-3.jpg"],
+    images: ['https://swiperjs.com/demos/images/nature-3.jpg'],
   };
 
   return (
@@ -166,7 +177,7 @@ const ProductPage = () => {
                           component="button"
                           color={element}
                           onClick={() => {
-                            colorsChecked?.forEach((instance) => {
+                            colorsChecked?.forEach(instance => {
                               if (instance.value === element) {
                                 instance.checked = !instance.checked;
                               } else {
@@ -176,9 +187,11 @@ const ProductPage = () => {
 
                             setColorsChecked([...colorsChecked!]);
                           }}
-                          style={{ color: "#fff", cursor: "pointer" }}
+                          style={{ color: '#fff', cursor: 'pointer' }}
                         >
-                          {colorsChecked && colorsChecked![index].checked && <Check />}
+                          {colorsChecked && colorsChecked![index].checked && (
+                            <Check />
+                          )}
                         </ColorSwatch>
                       );
                     })}
@@ -188,12 +201,69 @@ const ProductPage = () => {
               </div>
             </div>
             <div className="actions">
-              <NumberComponent></NumberComponent>
-              <Button color="teal" radius="xl" size="sm">
+              <NumberComponent
+                valueNumber={amountAddingCart}
+                callback={(val: number) => {
+                  setAmountAddingCart(val);
+                }}
+              ></NumberComponent>
+              <Button
+                color="teal"
+                radius="xl"
+                size="sm"
+                onClick={() => {
+                  if (product) {
+                    let color: string;
+                    colorsChecked?.forEach(instance => {
+                      if (instance.checked == true) {
+                        color = instance.value;
+                      }
+                      // if (instance.value === element) {
+                      //   instance.checked = !instance.checked;
+                      // } else {
+                      //   instance.checked = false;
+                      // }
+                    });
+                    let objectAddItemsToCart: cartItemsInterface = {
+                      ...product,
+                      color: color!,
+                      amount: amountAddingCart,
+                    };
+
+                    CartStorage.addItemToCart(objectAddItemsToCart);
+                  }
+                  // let objectAddCartItems: cartItemsInterface = {
+
+                  //   amount: 0,
+                  // };
+                  // let objectAddCart = {
+                  //   ...product,
+                  //   amountAddCart
+                  // }
+                }}
+              >
                 Add To Cart
               </Button>
-              <Button color="teal" radius="xl" size="sm">
+              <Button
+                color="teal"
+                radius="xl"
+                size="sm"
+                onClick={() => {
+                  let cart = CartStorage.getCart();
+                  console.log('ACB', cart);
+                }}
+              >
                 Buy Now
+              </Button>
+              <Button
+                color="teal"
+                radius="xl"
+                size="sm"
+                onClick={() => {
+                  CartStorage.removeCart();
+                }}
+              >
+                Remove
               </Button>
             </div>
           </ProductItem>
