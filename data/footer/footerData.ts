@@ -1,120 +1,84 @@
-import { v4 as uuidv4 } from "uuid";
-
+import { v4 as uuidv4 } from 'uuid';
+import { Phone, Search } from 'tabler-icons-react';
 export const FooterData = {
   introduce: {
-    logo: "/food-cat.png",
-    question: "If you have any question, please contact us at support@example.",
-    location: "TPHCM",
-    phone: "0978531164",
+    logo: '/logo-gas.png',
+    question:
+      'Chúng Tôi Luôn Xây Dựng Để Làm Hài Lòng Khách Hàng Và Hướng Đến Các Sản Phẩm Thân Thiện Với Môi Trường',
+    location: 'Địa Chỉ: Nguyễn Văn Bứa , Quận Hóc Môn',
+    phone: '0978531164',
+
     socialMedia: [
       {
-        image: "/twitter.png",
-        href: "/",
+        image: '/twitter.png',
+        href: '/',
         id: uuidv4(),
       },
       {
-        image: "/facebook.png",
-        href: "/",
+        image: '/facebook.png',
+        href: '/',
         id: uuidv4(),
       },
       {
-        image: "/instagram.png",
-        href: "/",
+        image: '/instagram.png',
+        href: '/',
         id: uuidv4(),
       },
       {
-        image: "/tiktok.png",
-        href: "/",
+        image: '/tiktok.png',
+        href: '/',
         id: uuidv4(),
       },
     ],
   },
-
-  corporate: [
+  policy: [
     {
-      title: "Careers",
+      title: 'Chính Sách Đổi Trả',
       id: uuidv4(),
     },
     {
-      title: "About Us",
+      title: 'Chính Sách Bảo Hành',
       id: uuidv4(),
     },
     {
-      title: "Code of Ethics",
-      id: uuidv4(),
-    },
-    {
-      title: "Event Sponsorships",
-      id: uuidv4(),
-    },
-    {
-      title: "Vendors",
-      id: uuidv4(),
-    },
-    {
-      title: "Affiliate Program",
+      title: 'Hướng Dẫn Đặt Hàng Online',
       id: uuidv4(),
     },
   ],
-
-  //   Track Order
-  //   Returns
-  //   Shipping Info
-  //   Recalls & Advisories
-  //   Pet Store Locator
-  //   Contact Us
-
-  customService: [
+  products: [
     {
-      title: "Track Order",
+      title: 'Gas Anh Kiệt',
       id: uuidv4(),
     },
     {
-      title: "Returns",
+      title: 'Gas Gia Đình',
       id: uuidv4(),
     },
     {
-      title: "Shipping Info",
+      title: 'Gas Nam Gas',
       id: uuidv4(),
     },
     {
-      title: "Recalls & Advisories ",
-      id: uuidv4(),
-    },
-    {
-      title: "Pet Store Locator",
-      id: uuidv4(),
-    },
-    {
-      title: "Contact Us",
+      title: 'Bếp Gas',
       id: uuidv4(),
     },
   ],
-
-  service: [
+  aboutUs: [
     {
-      title: "Grooming",
+      title: 'Cửa Hàng',
       id: uuidv4(),
     },
     {
-      title: "Positive Dog Training",
+      title: 'Giới Thiệu',
       id: uuidv4(),
     },
     {
+      title: 'Dịch Vụ',
       id: uuidv4(),
-      title: "Veterinary Services",
     },
     {
+      title: 'Liên Hệ',
       id: uuidv4(),
-      title: "Petco Insurance",
-    },
-    {
-      id: uuidv4(),
-      title: "Pet Adoption",
-    },
-    {
-      id: uuidv4(),
-      title: "Resource Center",
     },
   ],
 };

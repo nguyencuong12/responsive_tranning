@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { Grid, Collapse, Burger } from "@mantine/core";
-import Link from "next/link";
-import Image from "next/image";
-import { useViewportSize } from "@mantine/hooks";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFade, Navigation, Pagination } from "swiper";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { Grid, Collapse, Burger } from '@mantine/core';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useViewportSize } from '@mantine/hooks';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectFade, Navigation, Pagination } from 'swiper';
 
-import CarouselProducts from "../components/carouselProducts";
+import CarouselProducts from '../components/carouselProducts';
 
-import CardProduct from "../components/card/product";
+import CardProduct from '../components/card/product';
 
-import { HomeRender } from "../data/home/render/home";
-import { productInterface } from "../utils/interfaces/product/productInterface";
-import { CategoryData } from "../data/category/category";
-import { ProductAPI } from "../axios/product";
+import { HomeRender } from '../data/home/render/home';
+import { productInterface } from '../utils/interfaces/product/productInterface';
+import { CategoryData } from '../data/category/category';
+import { ProductAPI } from '../axios/product';
 
 interface ticketItemProps {
   accentColor?: string;
+  imageUrl?: string;
 }
 interface topBrandsProps {
   background?: string;
@@ -31,8 +32,8 @@ const Wrapper = styled.div`
   /* background: #f2f2f2; */
   /* min-height: 100vh; */
   /* margin: 80% auto; */
-  width: 80%;
-  margin: 0 auto;
+  /* width: 90%;
+  margin: 0 auto; */
   /* height: 200vh; */
 `;
 
@@ -100,24 +101,30 @@ const Category = styled.div`
 const Ticket = styled.div`
   display: flex;
   flex-direction: column;
+
+  justify-content: space-between;
 `;
 const TicketItem = styled.div<ticketItemProps>`
   position: relative;
-  margin: 5px 0;
   background: #000;
   min-height: 220px;
   width: 100%;
   border-radius: 10px;
-  background-image: url("./banner-1.png");
+  background-image: url(${props => props.imageUrl});
   background-size: cover;
   background-position: center;
+  border: 1px solid black;
+  :last-child {
+    margin-top: 10px;
+  }
 
   .ticket-accent {
     position: absolute;
     top: 50%;
     left: 5%;
     /* transform: translate(-50%, -50%); */
-    background-color: ${(props) => (props.accentColor ? props.accentColor : "orange")};
+    background-color: ${props =>
+      props.accentColor ? props.accentColor : 'orange'};
     padding: 4px 10px;
     border-radius: 20px;
     overflow: hidden;
@@ -138,6 +145,9 @@ const TicketItem = styled.div<ticketItemProps>`
 
 const Gallery = styled.div`
   height: 100%;
+
+  min-height: 250px;
+  border-radius: 10px;
 `;
 const TopBrands = styled.div`
   .topBrand-title {
@@ -155,7 +165,7 @@ const TopBrandItem = styled.div<topBrandsProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${(props) => (props.background ? props.background : "transparent")};
+  background: ${props => (props.background ? props.background : 'transparent')};
 `;
 
 const BestSale = styled.div`
@@ -179,11 +189,16 @@ const HotProducts = styled.div`
 
 const SaleOffBanner = styled.div`
   padding: 50px 0;
+
   position: relative;
 `;
-const SaleOffBannerItem = styled.div`
+interface saleofProps {
+  image?: string;
+  colorText?: string;
+}
+const SaleOffBannerItem = styled.div<saleofProps>`
   border-radius: 5px;
-  background-image: url("/saleBanner.webp");
+  background-image: url(${props => props.image});
   height: 280px;
   background-position: center;
   background-repeat: no-repeat;
@@ -195,7 +210,7 @@ const SaleOffBannerItem = styled.div`
   /* align-items: center; */
   padding-left: 100px;
   overflow: hidden;
-  color: #fff;
+  color: ${props => props.colorText};
   .title {
     font-size: 16px;
     font-weight: 600;
@@ -229,9 +244,9 @@ const BlogItem = styled.div<blogProps>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: ${(props) => (props.image ? `url(${props.image})` : null)};
+  background-image: ${props => (props.image ? `url(${props.image})` : null)};
   /* border: 2px solid #686868; */
-  color: ${(props) => (props.color ? props.color : "#fff")};
+  color: ${props => (props.color ? props.color : '#fff')};
   font-size: 18px;
   font-weight: 600;
   background-position: center;
@@ -246,10 +261,11 @@ const Policy = styled.div`
   padding: 20px 0;
   position: relative;
   .title {
-    font-size: 28px;
-    font-weight: 600;
+    font-size: 32px;
+    font-weight: 700;
     text-align: center;
     padding: 20px 0;
+    margin-bottom: 20px;
   }
 `;
 interface PolicyItemProps {
@@ -291,16 +307,16 @@ const Home = () => {
   }, []);
   const fetchProductFromPage = async () => {
     let response = await ProductAPI.getProduct();
-    console.log("repsonse ", response);
+    console.log('repsonse ', response);
   };
   const fetchHotProducts = async () => {
     let response = await ProductAPI.getHotProducts();
-    console.log("HOT", response);
+    console.log('HOT', response);
     setHotProducts(response.data.products);
   };
   const fetchBestSaleProducts = async () => {
     let response = await ProductAPI.getBestSaleProducts();
-    console.log("repsonse ", response);
+    console.log('repsonse ', response);
   };
   useEffect(() => {
     if (width <= 768) {
@@ -322,7 +338,7 @@ const Home = () => {
   function PolicyRender() {
     return (
       <Policy>
-        <div className="title">POLICY</div>
+        <div className="title">Các Chính Sách Của Chúng Tôi</div>
         <div className="content">
           <HomeRender.policyItemRender />
         </div>
@@ -340,8 +356,11 @@ const Home = () => {
   function BestSaleRender() {
     return (
       <BestSale>
-        <div className="title">Today Best Sale</div>
-        <div className="content">{/* <CarouselProducts products={productsObject}></CarouselProducts> */}</div>
+        <div className="title">Các Sản Phẩm Bán Chạy</div>
+        <div className="content">
+          {/* <HomeRender.popularBrand></HomeRender.popularBrand> */}
+          {/* <CarouselProducts products={productsObject}></CarouselProducts> */}
+        </div>
       </BestSale>
     );
   }
@@ -350,15 +369,18 @@ const Home = () => {
       <SaleOffBanner>
         <Grid>
           <Grid.Col md={6}>
-            <SaleOffBannerItem>
-              <div className="title">20% OFF ALL ITEMS </div>
-              <div className="content">Hot Summer Deals</div>
+            <SaleOffBannerItem
+              image="/gas-anhkiet/sale-off.jpg"
+              colorText={'#000'}
+            >
+              {/* <div className="title">Chương Trình Giảm Giá Trong Tuần </div>
+              <div className="content">-20%</div> */}
             </SaleOffBannerItem>
           </Grid.Col>
           <Grid.Col md={6}>
-            <SaleOffBannerItem>
-              TOYS, TREATS & LEASHES
-              <div className="content">Now At Wilone</div>
+            <SaleOffBannerItem image="/gas-anhkiet/sale-off1.jpg">
+              {/* TOYS, TREATS & LEASHES
+              <div className="content">Now At Wilone</div> */}
             </SaleOffBannerItem>
           </Grid.Col>
         </Grid>
@@ -379,7 +401,7 @@ const Home = () => {
   function HotProductsRender() {
     return (
       <HotProducts>
-        <div className="title">Hot Products</div>
+        <div className="title">Các Sản Phẩm Nổi Bật</div>
         <div className="content">
           <CarouselProducts products={hotProducts!}></CarouselProducts>
         </div>
@@ -388,41 +410,44 @@ const Home = () => {
   }
   function BannerRender() {
     return (
-      <Banner justify={"center"}>
-        <Grid.Col className="banner-ctx-left" md={3} sm={12} xs={12}>
+      <Banner>
+        {/* <Grid.Col className="banner-ctx-left" md={3} sm={12} xs={12}>
           <Category>
             <div className="category-title">
               <div className="title-content">Category</div>
               <div className="collapse-title">
                 <Burger
                   opened={opened}
-                  size={"sm"}
-                  onClick={(e) => {
+                  size={'sm'}
+                  onClick={e => {
                     setOpened(!opened);
                   }}
                 />
               </div>
             </div>
             <Collapse in={opened}>
-              {CategoryData.map((instance) => {
+              {CategoryData.map(instance => {
                 return (
                   <div className="category-item" key={instance.id}>
                     <Link href={instance.href}>
                       <div className="category-item-content">
-                        <Image src={instance.image} alt="image" height={32} width={32}></Image>
+                        <Image
+                          src={instance.image}
+                          alt="image"
+                          height={32}
+                          width={32}
+                        ></Image>
                         <div>{instance.title}</div>
                       </div>
                     </Link>
                   </div>
                 );
               })}
-              {/* <div className="category-item">
-                <Link href="/">{renderCategoryItems("/cat.png", "Cat")}</Link>
-              </div> */}
+            
             </Collapse>
           </Category>
-        </Grid.Col>
-        <Grid.Col className="banner-ctx-center" md={6} sm={12} xs={12}>
+        </Grid.Col> */}
+        <Grid.Col md={8} sm={12} xs={12}>
           <Gallery>
             <Swiper
               pagination={{
@@ -433,21 +458,24 @@ const Home = () => {
               slidesPerView={1}
             >
               <SwiperSlide>
-                <Image src="https://swiperjs.com/demos/images/nature-1.jpg" layout="fill" alt="image"></Image>
+                <Image src="/slider-1.jpg" layout="fill" alt="image"></Image>
               </SwiperSlide>
               <SwiperSlide>
-                <Image src="https://swiperjs.com/demos/images/nature-2.jpg" layout="fill" alt="image"></Image>
+                <Image src="/slider-2.png" layout="fill" alt="image"></Image>
+              </SwiperSlide>
+              <SwiperSlide>
+                <Image src="/slider-3.png" layout="fill" alt="image"></Image>
               </SwiperSlide>
             </Swiper>
           </Gallery>
         </Grid.Col>
-        <Grid.Col className="banner-ctx-right" md={3} sm={12} xs={12}>
+        <Grid.Col className="banner-ctx-right" md={4} sm={12} xs={12}>
           <Ticket>
-            <TicketItem>
+            <TicketItem imageUrl="/banner/banner-3.webp">
               <div className="ticket-accent">from $20.0</div>
               <div className="ticket-description">Description</div>
             </TicketItem>
-            <TicketItem>
+            <TicketItem imageUrl="/banner/banner-4.webp">
               <div className="ticket-accent">from $20.0</div>
               <div className="ticket-description">Description</div>
             </TicketItem>
@@ -460,12 +488,12 @@ const Home = () => {
   return (
     <Wrapper>
       <BannerRender></BannerRender>
-      <TopBrandRender></TopBrandRender>
+      <PolicyRender></PolicyRender>
+      {/* <TopBrandRender></TopBrandRender> */}
       <HotProductsRender></HotProductsRender>
       <BestSaleRender></BestSaleRender>
       <SaleOffBannerRender></SaleOffBannerRender>
-      <PolicyRender></PolicyRender>
-      <BlogRender></BlogRender>
+      {/* <BlogRender></BlogRender> */}
     </Wrapper>
   );
 };

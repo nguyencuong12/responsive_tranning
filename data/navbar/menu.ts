@@ -1,7 +1,7 @@
 export const NavMenu = [
-  { title: "Home", href: "/" },
-  { title: "About Us", href: "/about" },
-  { title: "Shop", href: "/shop" },
-  { title: "Contact", href: "/contact" },
-  { title: "Products", href: "/products" },
+  { title: 'Trang Chủ', href: '/' },
+  { title: 'Dịch Vụ', href: '/about' },
+  { title: 'Sản Phẩm', href: '/shop' },
+  { title: 'Cửa Hàng', href: '/shop' },
+  { title: 'Liên Hệ', href: '/contact' },
 ];

@@ -1,68 +1,70 @@
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from 'uuid';
 
 export const HomeData = {
   policy: [
     {
-      title: "Free Same-Day Delivery",
-      subTitle: "Order by 2pm local time to get free delivery on orders $35+ today.",
-      image: "/delivery.png",
+      title: 'Giao Hàng Miễn Phí',
+      subTitle: 'Giao Hàng Nhanh Chóng Trong Khu Vực Hóc Môn',
+      image: '/delivery.png',
     },
     {
-      title: "30 Day Return",
-      subTitle: "35% off your first order plus 5% off all future orders.",
-      image: "/exchange.png",
+      title: 'Kiểm Tra Trước Khi Giao Hàng',
+      subTitle:
+        'Luôn Luôn Kiểm Tra Sản Phẩm Đạt Tiêu Chuẩn Tuyệt Đối Trước Khi Giao Cho Khách Hàng',
+      image: '/gas-anhkiet/checked.png',
     },
     {
-      title: "Security payment",
-      subTitle: "25% off your online order of $50+. Available at most locations.",
-      image: "/shield.png",
+      title: 'Bảo Trì Gas Miễn Phí',
+      subTitle: 'Bảo Trì Và Tư Vấn Miễn Phí Cho Khách Hàng',
+      image: '/gas-anhkiet/maintenance.png',
     },
     {
-      title: "24/7 Support",
-      subTitle: "Shop online to get orders over $35 shipped fast and free.",
-      image: "/support.png",
+      title: 'Hỗ Trợ Khách Hàng ',
+      subTitle:
+        'Khách Hàng Có Những Thắc Mắc Có Thể Liên Hệ Đến Cửa Hàng Để Được Hỗ Trợ Tuyệt Đối.',
+      image: '/support.png',
     },
   ],
   blogs: [
     {
-      image: "/food-cat.png",
-      title: "Cat Foods",
+      image: '/food-cat.png',
+      title: 'Cat Foods',
     },
     {
-      image: "/care.png",
-      title: "Knowledge Care",
+      image: '/care.png',
+      title: 'Knowledge Care',
     },
     {
-      image: "/health.png",
-      title: "Health",
+      image: '/health.png',
+      title: 'Health',
     },
     {
-      image: "/disease.png",
-      title: "Disease",
+      image: '/disease.png',
+      title: 'Disease',
     },
   ],
 
   popularBrands: [
     {
       id: uuidv4(),
-      image: "/me0.png",
-      background: "#f7ee25",
+      image: '/me0.png',
+      background: '#f7ee25',
     },
     {
       id: uuidv4(),
 
-      image: "/me0.png",
-      background: "#595959",
+      image: '/me0.png',
+      background: '#595959',
     },
     {
       id: uuidv4(),
-      image: "/me0.png",
+      image: '/me0.png',
       // background: "#f7ee25",
     },
     {
       id: uuidv4(),
-      image: "/me0.png",
-      background: "#898989",
+      image: '/me0.png',
+      background: '#898989',
     },
   ],
 };

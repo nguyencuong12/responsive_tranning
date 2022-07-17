@@ -1,10 +1,11 @@
-import React, { ReactNode } from "react";
-import styled from "styled-components";
-import Navbar from "./navbar";
-import { FooterData } from "../data/footer/footerData";
-import { Grid } from "@mantine/core";
-import Image from "next/image";
-import { Location, Phone } from "tabler-icons-react";
+import React, { ReactNode } from 'react';
+import styled from 'styled-components';
+import Navbar from './navbar';
+import { FooterData } from '../data/footer/footerData';
+import { Grid } from '@mantine/core';
+import Image from 'next/image';
+import { Location, Map, Phone } from 'tabler-icons-react';
+import Link from 'next/link';
 const LayoutWrapper = styled.div`
   position: relative;
   min-height: 100vh;
@@ -15,7 +16,9 @@ interface propsType {
 const Body = styled.div`
   position: relative;
   min-height: 50vh;
-  padding: 100px 0%;
+  padding-top: 100px;
+  width: 90%;
+  margin: 0 auto;
 `;
 const Footer = styled.div`
   margin-top: 50px;
@@ -24,7 +27,7 @@ const Footer = styled.div`
   bottom: 0;
   width: 100%;
   background-color: red;
-  background-image: url("/footer.webp");
+  background-image: url('/footer.webp');
   background-repeat: no-repeat;
   background-size: cover;
   color: #868686;
@@ -41,6 +44,7 @@ const FooterTop = styled.div`
   min-height: 300px;
   /* margin: 10px 0px; */
   position: relative;
+  padding: 10px 0;
   border-bottom: 1px solid #686868;
 `;
 const FooterBottom = styled.div`
@@ -75,17 +79,24 @@ const FooterTopItems = styled.div`
   flex-direction: column;
   align-items: flex-start;
   .footer-items {
-    padding: 10px 0px;
+    padding: 8px 0px;
     font-size: 14px;
     font-weight: 600;
+  }
+  .footer-items.link {
+    cursor: pointer;
+    transition: color 200ms ease;
+    :hover {
+      color: red;
+    }
   }
 
   .location,
   .phone {
+    font-size: 14px;
     padding: 10px 0px;
     color: #fff !important;
     display: flex;
-
     width: 100%;
     div {
       margin-left: 10px;
@@ -117,13 +128,21 @@ const Layout = (props: propsType) => {
       <Footer>
         <FooterTop>
           <FooterTopContent>
-            <Grid>
-              <Grid.Col md={3}>
+            <Grid justify="space-between">
+              <Grid.Col md={4}>
                 <FooterTopItems>
-                  <Image alt="image" src={FooterData.introduce.logo} height={60} width={60} objectFit={"contain"}></Image>
-                  <div className="footer-items">{FooterData.introduce.question}</div>
+                  <Image
+                    alt="image"
+                    src={FooterData.introduce.logo}
+                    height={100}
+                    width={120}
+                    objectFit={'contain'}
+                  ></Image>
+                  <div className="footer-items">
+                    {FooterData.introduce.question}
+                  </div>
                   <div className="location">
-                    <Location></Location>
+                    <Map></Map>
                     <div>{FooterData.introduce.location}</div>
                   </div>
                   <div className="phone">
@@ -131,48 +150,59 @@ const Layout = (props: propsType) => {
                     <div>{FooterData.introduce.phone}</div>
                   </div>
                   <div className="social-media">
-                    {FooterData.introduce.socialMedia.map((element) => {
+                    {FooterData.introduce.socialMedia.map(element => {
                       return (
                         <div key={element.id}>
-                          <Image alt="image" src={element.image} height={35} width={35}></Image>
+                          <Image
+                            alt="image"
+                            src={element.image}
+                            height={35}
+                            width={35}
+                          ></Image>
                         </div>
                       );
                     })}
                   </div>
                 </FooterTopItems>
               </Grid.Col>
-              <Grid.Col md={3}>
+              <Grid.Col md={2}>
                 <FooterTopItems>
-                  <h3 style={{ color: "#fff" }}>Corporate</h3>
-                  {FooterData.corporate.map((instance) => {
+                  <h3 style={{ color: '#fff' }}>Chính Sách</h3>
+                  {FooterData.policy.map(instance => {
                     return (
-                      <span key={instance.id} className="footer-items">
-                        {instance.title}
-                      </span>
+                      <Link href="/" key={instance.id}>
+                        <span className="footer-items link">
+                          {instance.title}
+                        </span>
+                      </Link>
                     );
                   })}
                 </FooterTopItems>
               </Grid.Col>
-              <Grid.Col md={3}>
+              <Grid.Col md={2}>
                 <FooterTopItems>
-                  <h3 style={{ color: "#fff" }}>Custom Service</h3>
-                  {FooterData.customService.map((instance) => {
+                  <h3 style={{ color: '#fff' }}>Sản Phẩm</h3>
+                  {FooterData.products.map(instance => {
                     return (
-                      <span key={instance.id} className="footer-items">
-                        {instance.title}
-                      </span>
+                      <Link href="/" key={instance.id}>
+                        <span className="footer-items link">
+                          {instance.title}
+                        </span>
+                      </Link>
                     );
                   })}
                 </FooterTopItems>
               </Grid.Col>
-              <Grid.Col md={3}>
+              <Grid.Col md={2}>
                 <FooterTopItems>
-                  <h3 style={{ color: "#fff" }}>Custom Service</h3>
-                  {FooterData.service.map((instance) => {
+                  <h3 style={{ color: '#fff' }}>Về Chúng Tôi</h3>
+                  {FooterData.aboutUs.map(instance => {
                     return (
-                      <span key={instance.id} className="footer-items">
-                        {instance.title}
-                      </span>
+                      <Link href="/" key={instance.id}>
+                        <span className="footer-items link">
+                          {instance.title}
+                        </span>
+                      </Link>
                     );
                   })}
                 </FooterTopItems>
@@ -182,9 +212,15 @@ const Layout = (props: propsType) => {
         </FooterTop>
         <FooterBottom>
           <FooterBottomContent>
-            <div>© 2022 Sashimeomeo Pets Store</div>
+            <div>© 2022 Cửa Hàng Gas Anh Kiệt</div>
             <div>
-              <Image alt="image" src="/payment.png" width={350} height={40} objectFit={"contain"}></Image>
+              <Image
+                alt="image"
+                src="/payment.png"
+                width={350}
+                height={40}
+                objectFit={'contain'}
+              ></Image>
             </div>
           </FooterBottomContent>
         </FooterBottom>

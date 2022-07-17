@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import Link from "next/link";
-import { ActionIcon, Burger } from "@mantine/core";
-import { ShoppingCart } from "tabler-icons-react";
-import { useState } from "react";
-import { useViewportSize } from "@mantine/hooks";
-import { NavMenu } from "../data/navbar/menu";
-import Image from "next/image";
-import { useRouter } from "next/router";
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import Link from 'next/link';
+import { ActionIcon, Burger } from '@mantine/core';
+import { Search, SearchOff, ShoppingCart } from 'tabler-icons-react';
+import { useState } from 'react';
+import { useViewportSize } from '@mantine/hooks';
+import { NavMenu } from '../data/navbar/menu';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 interface menuProps {
   open: boolean;
 }
@@ -26,8 +26,8 @@ const NavbarWrapper = styled.div`
   /* border: 2px solid black; */
   height: 70px;
   z-index: 500;
-  color: #000;
-  background: #f8f1f1;
+  color: #fff;
+  background: #2a292e;
 
   /* overflow: hidden; */
   /* overflow: hidden; */
@@ -61,7 +61,7 @@ const NavbarMenu = styled.ul<menuProps>`
     top: 54px;
     width: 100%;
     padding: 20px;
-    left: ${(props) => (props.open ? "0" : "-120%")};
+    left: ${props => (props.open ? '0' : '-120%')};
     /* left: -120%; */
     right: 0;
     height: auto;
@@ -76,12 +76,12 @@ const NavbarMenu = styled.ul<menuProps>`
 `;
 const NavbarMenuItem = styled.li`
   padding: 10px 25px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   a {
     text-decoration: none;
     display: block;
-    /* color: ${(props) => props.theme.secondary}; */
+    /* color: ${props => props.theme.secondary}; */
     transition: color 200ms;
   }
   @media only screen and (max-width: 700px) {
@@ -109,10 +109,10 @@ const NavbarActions = styled.ul`
 const NavbarActionsItem = styled.li``;
 const MobileMenu = styled.ul<menuProps>`
   transition: opacity 300ms;
-  opacity: ${(props) => (props.open ? 1 : 0)};
+  opacity: ${props => (props.open ? 1 : 0)};
   position: relative;
-  visibility: ${(props) => (props.open ? "visible" : "hidden")};
-  max-height: ${(props) => (props.open ? "100vh" : "0px")};
+  visibility: ${props => (props.open ? 'visible' : 'hidden')};
+  max-height: ${props => (props.open ? '100vh' : '0px')};
   top: 0;
   left: 0;
   right: 0;
@@ -144,7 +144,7 @@ const Navbar = () => {
   function RenderNavbarMenu(): JSX.Element {
     return (
       <>
-        {NavMenu.map((element) => (
+        {NavMenu.map(element => (
           <NavbarMenuItem key={element.title}>
             <Link href={element.href}>
               <a>{element.title}</a>
@@ -157,7 +157,7 @@ const Navbar = () => {
   function RenderNavbarMenuMobile(): JSX.Element {
     return (
       <>
-        {NavMenu.map((element) => (
+        {NavMenu.map(element => (
           <NavbarMenuItem key={element.title}>
             <Link href={element.href}>
               <a>{element.title}</a>
@@ -172,30 +172,42 @@ const Navbar = () => {
       <NavbarWrapper>
         <NavbarContent>
           <BurgerBtn>
-            <Burger opened={opened} onClick={_onHandleBurger} size={"sm"} />
+            <Burger
+              opened={opened}
+              onClick={_onHandleBurger}
+              size={'sm'}
+              style={{ background: 'white' }}
+            />
           </BurgerBtn>
           <NavbarBrand>
             <Link href="/">
               <a>
-                <Image src="/logo.png" height={50} width={50} alt="brand image"></Image>
+                <Image
+                  src="/logo-gas.png"
+                  height={70}
+                  width={100}
+                  alt="brand image"
+                  objectFit="contain"
+                ></Image>
               </a>
             </Link>
           </NavbarBrand>
           <NavbarMenu open={opened}>
             <RenderNavbarMenu />
           </NavbarMenu>
-
           <NavbarActions>
-            <NavbarActionsItem></NavbarActionsItem>
+            {/* <NavbarActionsItem></NavbarActionsItem> */}
             <NavbarActionsItem>
               <ActionIcon
                 variant="transparent"
-                color={"cyan"}
+                // color={'cyan'}
+                style={{ color: 'white' }}
                 onClick={() => {
-                  router.push("/cart");
+                  router.push('/cart');
                 }}
               >
-                <ShoppingCart />
+                <Search />
+                {/* <ShoppingCart /> */}
               </ActionIcon>
             </NavbarActionsItem>
           </NavbarActions>
