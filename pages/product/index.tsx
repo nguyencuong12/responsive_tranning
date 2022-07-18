@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { ActionIcon, Grid, Button, Modal } from "@mantine/core";
-import NumberComponent from "../../components/numberComponent";
-import { ArrowsMaximize } from "tabler-icons-react";
-import PreviewSwiper from "../../components/swiper/preview";
-import { previewInterface } from "../../utils/interfaces/carousel/previewImage";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { ActionIcon, Grid, Button, Modal } from '@mantine/core';
+import NumberComponent from '../../components/numberComponent';
+import { ArrowsMaximize } from 'tabler-icons-react';
+import PreviewSwiper from '../../components/swiper/preview';
+import { previewInterface } from '../../utils/interfaces/carousel/previewImage';
 const Wrapper = styled.div`
   /* border: 2px solid red; */
   height: 100%;
@@ -69,7 +69,7 @@ const ProductImagePreviewTop = styled.div`
   margin: 10px 0;
   border-radius: 5px;
   min-height: 500px;
-  background-image: url("/cat.png");
+  background-image: url('/cat.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -99,7 +99,10 @@ const ProductPage = () => {
   // let cuong: previewInterface = [images:"123"];
 
   const previewImages: previewInterface = {
-    images: ["https://swiperjs.com/demos/images/nature-3.jpg", "https://swiperjs.com/demos/images/nature-4.jpg"],
+    images: [
+      'https://swiperjs.com/demos/images/nature-3.jpg',
+      'https://swiperjs.com/demos/images/nature-4.jpg',
+    ],
   };
 
   return (
@@ -131,20 +134,32 @@ const ProductPage = () => {
               <span className="tag">-11%</span>
             </div>
             <div className="description">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur.
             </div>
 
             <div className="color">
               <span className="title-color">Color</span>
               <div className="content">
-                <ActionIcon radius="xl" variant="filled" color={"red"}></ActionIcon>
+                <ActionIcon
+                  radius="xl"
+                  variant="filled"
+                  color={'red'}
+                ></ActionIcon>
 
-                <ActionIcon radius="xl" variant="filled" color={"red"}></ActionIcon>
+                <ActionIcon
+                  radius="xl"
+                  variant="filled"
+                  color={'red'}
+                ></ActionIcon>
               </div>
             </div>
             <div className="actions">
-              <NumberComponent></NumberComponent>
+              {/* <NumberComponent></NumberComponent> */}
               <Button color="teal" radius="xl" size="sm">
                 Add To Cart
               </Button>
