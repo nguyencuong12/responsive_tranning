@@ -19,6 +19,12 @@ export const ProductAPI = {
       url: url + "/hot",
     });
   },
+  getFeatureProducts(){
+    return axios({
+      method:"POST",
+      url:url + "/feature"
+    })
+  },
   getBestSaleProducts() {
     return axios({
       method: "POST",

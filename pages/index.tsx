@@ -301,14 +301,24 @@ const Home = () => {
   const { width } = useViewportSize();
   const [products, setProducts] = useState<productInterface[]>();
   const [hotProducts, setHotProducts] = useState<productInterface[]>();
+  const [featureProducts,setFeatureProducts] = useState<productInterface[]>();
+  const [bestSaleProducts,setBestSaleProducts] = useState<productInterface[]>();
   useEffect(() => {
-    // fetchProductFromPage();
-    fetchHotProducts();
+  
+    Promise.all([
+      fetchFeatureProducts(),
+      fetchBestSaleProducts()
+    ])
   }, []);
   const fetchProductFromPage = async () => {
     let response = await ProductAPI.getProduct();
     console.log('repsonse ', response);
   };
+  const fetchFeatureProducts = async()=>{
+    let response = await ProductAPI.getFeatureProducts();
+    setFeatureProducts(response.data.products);
+  
+  }
   const fetchHotProducts = async () => {
     let response = await ProductAPI.getHotProducts();
     console.log('HOT', response);
@@ -316,7 +326,8 @@ const Home = () => {
   };
   const fetchBestSaleProducts = async () => {
     let response = await ProductAPI.getBestSaleProducts();
-    console.log('repsonse ', response);
+    console.log("response",response)
+    setBestSaleProducts(response.data.products);
   };
   useEffect(() => {
     if (width <= 768) {
@@ -359,7 +370,7 @@ const Home = () => {
         <div className="title">Các Sản Phẩm Bán Chạy</div>
         <div className="content">
           {/* <HomeRender.popularBrand></HomeRender.popularBrand> */}
-          {/* <CarouselProducts products={productsObject}></CarouselProducts> */}
+          <CarouselProducts products={bestSaleProducts!}></CarouselProducts>
         </div>
       </BestSale>
     );
@@ -403,7 +414,7 @@ const Home = () => {
       <HotProducts>
         <div className="title">Các Sản Phẩm Nổi Bật</div>
         <div className="content">
-          <CarouselProducts products={hotProducts!}></CarouselProducts>
+          <CarouselProducts products={featureProducts!}></CarouselProducts>
         </div>
       </HotProducts>
     );

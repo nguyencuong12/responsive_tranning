@@ -93,7 +93,7 @@ const CardProduct = (props: { product: productInterface }) => {
 
         {/* <img src={product.image}></img> */}
       </CardProductImage>
-      <CardProductTitle>{product.name}</CardProductTitle>
+      <CardProductTitle>{product.title}</CardProductTitle>
       <CardProductPrice>{product.price}</CardProductPrice>
       <div className="actions">
         <ActionIcon
@@ -114,8 +114,8 @@ const CardProduct = (props: { product: productInterface }) => {
           <ShoppingCart />
         </ActionIcon>
       </div>
-      <div className="hot-action">Hot</div>
-      <div className="sale-action">-10%</div>
+      <div className="hot-action">*</div>
+      {/* <div className="sale-action">-10%</div> */}
     </Wrapper>
   );
 };

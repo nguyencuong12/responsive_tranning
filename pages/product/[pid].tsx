@@ -21,6 +21,8 @@ const Wrapper = styled.div`
 const ProductItem = styled.div`
   position: relative;
   padding: 10px;
+
+  white-space: pre-line;
   .title {
     font-size: 38px;
     font-weight: 600;
@@ -124,6 +126,9 @@ const ProductPage = () => {
 
       // console.log("TEMP", tempArr);
     }
+    if(product){
+      console.log("TEST ",product?.description);
+    }
   }, [product]);
   useEffect(() => {
     if (colorsChecked) {
@@ -132,8 +137,9 @@ const ProductPage = () => {
   }, [colorsChecked]);
   const getProductFromID = async (id: string) => {
     let response = await ProductAPI.getProductFromID(id);
-    console.log("response", response);
+    console.log("response ID", response);
     setProduct(response.data.product);
+   
   };
   const previewImages: previewInterface = {
     images: ["https://swiperjs.com/demos/images/nature-3.jpg"],
@@ -152,10 +158,10 @@ const ProductPage = () => {
             <div className="title">{product?.title}</div>
             <div className="price">
               <span>{product?.price}</span>
-              <span className="tag">-11%</span>
+              {/* <span className="tag">-11%</span> */}
             </div>
-            <div className="description">{product?.description}</div>
-            <div className="color">
+            <div className="description" >{product?.description}</div>
+            {product?.color &&      <div className="color">
               <span className="title-color">Color</span>
               <div className="content">
                 <Group position="center" spacing="xs">
@@ -187,7 +193,8 @@ const ProductPage = () => {
                   {/* <ColorSwatch component="a" href="https://mantine.dev" color={theme.colors.blue[6]} /> */}
                 </Group>
               </div>
-            </div>
+            </div>}
+       
             <div className="actions">
               <NumberComponent
                 valueNumber={amountAddingCart}
@@ -200,34 +207,23 @@ const ProductPage = () => {
                 radius="xl"
                 size="sm"
                 onClick={() => {
-                  if (product) {
-                    let color: string;
-                    colorsChecked?.forEach((instance) => {
-                      if (instance.checked == true) {
-                        color = instance.value;
-                      }
-                      // if (instance.value === element) {
-                      //   instance.checked = !instance.checked;
-                      // } else {
-                      //   instance.checked = false;
-                      // }
-                    });
-                    let objectAddItemsToCart: cartItemsInterface = {
-                      ...product,
-                      color: color!,
-                      amount: amountAddingCart,
-                    };
+                  // if (product) {
+                  //   let color: string;
+                  //   colorsChecked?.forEach((instance) => {
+                  //     if (instance.checked == true) {
+                  //       color = instance.value;
+                  //     }
+                    
+                  //   });
+                  //   let objectAddItemsToCart: cartItemsInterface = {
+                  //     ...product,
+                  //     color: color!,
+                  //     amount: amountAddingCart,
+                  //   };
 
-                    CartStorage.addItemToCart(objectAddItemsToCart);
-                  }
-                  // let objectAddCartItems: cartItemsInterface = {
-
-                  //   amount: 0,
-                  // };
-                  // let objectAddCart = {
-                  //   ...product,
-                  //   amountAddCart
+                  //   CartStorage.addItemToCart(objectAddItemsToCart);
                   // }
+              
                 }}
               >
                 Add To Cart

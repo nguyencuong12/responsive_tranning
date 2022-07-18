@@ -38,7 +38,7 @@ const CarouselProducts = (props: { products: productInterface[] }) => {
         }}
         slidesPerView={1}
       >
-        {products &&
+        {products  &&
           products.map((product) => {
             return (
               <SwiperSlide key={uuidv4()}>

@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import Navbar from './navbar';
 import { FooterData } from '../data/footer/footerData';
-import { Grid } from '@mantine/core';
+import { Grid, Modal } from '@mantine/core';
 import Image from 'next/image';
 import { Location, Map, Phone } from 'tabler-icons-react';
 import Link from 'next/link';
@@ -124,7 +124,9 @@ const Layout = (props: propsType) => {
   return (
     <LayoutWrapper>
       <Navbar></Navbar>
-      <Body>{children}</Body>
+      <Body>
+     
+        {children}</Body>
       <Footer>
         <FooterTop>
           <FooterTopContent>
