@@ -21,7 +21,7 @@ const ProductByCategory = (props: propsType) => {
                 {products &&
                     products.map((product) => {
                         return (
-                            <Grid.Col sm={6} lg={3} md={6}>
+                            <Grid.Col sm={6} lg={3} md={6} key={product._id}>
                                 <CardProduct product={product}></CardProduct>
                             </Grid.Col>
                         );

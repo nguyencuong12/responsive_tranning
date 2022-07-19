@@ -200,6 +200,7 @@ const Navbar = () => {
                                 {element.products.map((product) => {
                                     return (
                                         <Menu.Item
+                                            key={product.title}
                                             rightSection={<BuildingStore />}
                                             onClick={() => {
                                                 router.push(`/${product.href}`);
