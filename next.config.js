@@ -7,7 +7,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ["swiperjs.com", "localhost"],
+    domains: ["swiperjs.com", "localhost","api.sashimeomeo.com"],
   },
   experimental: {
     concurrentFeatures: true,

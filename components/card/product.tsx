@@ -87,7 +87,7 @@ const CardProductActions = styled.div``;
 const CardProduct = (props: { product: productInterface }) => {
     const { product } = props;
     const router = useRouter();
-
+    console.log("product", product);
     return (
         <Wrapper
             onClick={() => {
@@ -96,7 +96,7 @@ const CardProduct = (props: { product: productInterface }) => {
         >
             <CardProductImage>
                 <Image
-                    src={product.image![0]!.toString()}
+                    src={product.image[0].toString()}
                     height={300}
                     width={500}
                     alt="image"
