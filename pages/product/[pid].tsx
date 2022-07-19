@@ -1,26 +1,35 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { ActionIcon, Grid, Button, Modal, CheckboxGroup, Checkbox, ColorSwatch, Group, useMantineTheme } from "@mantine/core";
-import NumberComponent from "../../components/numberComponent";
-import { ArrowsMaximize } from "tabler-icons-react";
-import PreviewSwiper from "../../components/swiper/preview";
-import { previewInterface } from "../../utils/interfaces/carousel/previewImage";
-import { useRouter } from "next/router";
-import { productInterface } from "../../utils/interfaces/product/productInterface";
-import { ProductAPI } from "../../axios/product";
-import { Check } from "tabler-icons-react";
-import { cartItemsInterface } from "../../utils/interfaces/cart/cartItems";
-import { CartStorage } from "../../utils/cartStorage/cartStorage";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import {
+  ActionIcon,
+  Grid,
+  Button,
+  Modal,
+  CheckboxGroup,
+  Checkbox,
+  ColorSwatch,
+  Group,
+  useMantineTheme,
+} from '@mantine/core';
+import NumberComponent from '../../components/numberComponent';
+import { ArrowsMaximize } from 'tabler-icons-react';
+import PreviewSwiper from '../../components/swiper/preview';
+import { previewInterface } from '../../utils/interfaces/carousel/previewImage';
+import { useRouter } from 'next/router';
+import { productInterface } from '../../utils/interfaces/product/productInterface';
+import { ProductAPI } from '../../axios/product';
+import { Check } from 'tabler-icons-react';
+import { cartItemsInterface } from '../../utils/interfaces/cart/cartItems';
+import { CartStorage } from '../../utils/cartStorage/cartStorage';
+import formatEvents from '../../utils/formatPrice/formatPrice';
 const Wrapper = styled.div`
   /* border: 2px solid red; */
- 
+
   height: 100%;
   position: relative;
-
 `;
 const ProductItem = styled.div`
   position: relative;
-
 
   white-space: pre-line;
   .title {
@@ -62,13 +71,13 @@ const ProductItem = styled.div`
     }
   }
   .actions {
-    padding: 10px 10px;
+    padding: 10px 0;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: nowrap;
-    width: 380px;
+    min-width: 250px;
   }
 `;
 const ProductImagePreviewTop = styled.div`
@@ -77,7 +86,7 @@ const ProductImagePreviewTop = styled.div`
   margin: 10px 0;
   border-radius: 5px;
   min-height: 500px;
-  background-image: url("/cat.png");
+  background-image: url('/cat.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -116,7 +125,7 @@ const ProductPage = () => {
   useEffect(() => {
     if (product?.colors) {
       let arr: any = [];
-      product.colors.forEach((value) => {
+      product.colors.forEach(value => {
         arr.push({
           value: value,
           checked: false,
@@ -126,23 +135,22 @@ const ProductPage = () => {
 
       // console.log("TEMP", tempArr);
     }
-    if(product){
-      console.log("TEST ",product?.description);
+    if (product) {
+      console.log('TEST ', product?.description);
     }
   }, [product]);
   useEffect(() => {
     if (colorsChecked) {
-      console.log("CHANGE", colorsChecked);
+      console.log('CHANGE', colorsChecked);
     }
   }, [colorsChecked]);
   const getProductFromID = async (id: string) => {
     let response = await ProductAPI.getProductFromID(id);
-    console.log("response ID", response);
+    console.log('response ID', response);
     setProduct(response.data.product);
-   
   };
   const previewImages: previewInterface = {
-    images: ["https://swiperjs.com/demos/images/nature-3.jpg"],
+    images: ['https://swiperjs.com/demos/images/nature-3.jpg'],
   };
 
   return (
@@ -157,76 +165,81 @@ const ProductPage = () => {
           <ProductItem>
             <div className="title">{product?.title}</div>
             <div className="price">
-              <span>{product?.price}</span>
+              <span>{formatEvents.priceVND(parseFloat(product?.price!))}</span>
               {/* <span className="tag">-11%</span> */}
             </div>
-            <div className="description" >{product?.description}</div>
-            {product?.color &&      <div className="color">
-              <span className="title-color">Color</span>
-              <div className="content">
-                <Group position="center" spacing="xs">
-                  {product &&
-                    product.colors?.map((element, index) => {
-                      return (
-                        <ColorSwatch
-                          key={element}
-                          component="button"
-                          color={element}
-                          onClick={() => {
-                            colorsChecked?.forEach((instance) => {
-                              if (instance.value === element) {
-                                instance.checked = !instance.checked;
-                              } else {
-                                instance.checked = false;
-                              }
-                            });
+            <div className="description">{product?.description}</div>
+            {product?.color && (
+              <div className="color">
+                <span className="title-color">Color</span>
+                <div className="content">
+                  <Group position="center" spacing="xs">
+                    {product &&
+                      product.colors?.map((element, index) => {
+                        return (
+                          <ColorSwatch
+                            key={element}
+                            component="button"
+                            color={element}
+                            onClick={() => {
+                              colorsChecked?.forEach(instance => {
+                                if (instance.value === element) {
+                                  instance.checked = !instance.checked;
+                                } else {
+                                  instance.checked = false;
+                                }
+                              });
 
-                            setColorsChecked([...colorsChecked!]);
-                          }}
-                          style={{ color: "#fff", cursor: "pointer" }}
-                        >
-                          {colorsChecked && colorsChecked![index].checked && <Check />}
-                        </ColorSwatch>
-                      );
-                    })}
+                              setColorsChecked([...colorsChecked!]);
+                            }}
+                            style={{ color: '#fff', cursor: 'pointer' }}
+                          >
+                            {colorsChecked && colorsChecked![index].checked && (
+                              <Check />
+                            )}
+                          </ColorSwatch>
+                        );
+                      })}
 
-                  {/* <ColorSwatch component="a" href="https://mantine.dev" color={theme.colors.blue[6]} /> */}
-                </Group>
+                    {/* <ColorSwatch component="a" href="https://mantine.dev" color={theme.colors.blue[6]} /> */}
+                  </Group>
+                </div>
               </div>
-            </div>}
-       
+            )}
+
+            <div className="status" style={{ fontWeight: 700 }}>
+              Trạng Thái : Còn Hàng
+            </div>
             <div className="actions">
-              <NumberComponent
+              {/* <NumberComponent
                 valueNumber={amountAddingCart}
                 callback={(val: number) => {
                   setAmountAddingCart(val);
                 }}
-              ></NumberComponent>
+              ></NumberComponent> */}
               <Button
                 color="teal"
                 radius="xl"
-                size="sm"
+                size="md"
                 onClick={() => {
+                  router.push('/contact');
                   // if (product) {
                   //   let color: string;
                   //   colorsChecked?.forEach((instance) => {
                   //     if (instance.checked == true) {
                   //       color = instance.value;
                   //     }
-                    
                   //   });
                   //   let objectAddItemsToCart: cartItemsInterface = {
                   //     ...product,
                   //     color: color!,
                   //     amount: amountAddingCart,
                   //   };
-
                   //   CartStorage.addItemToCart(objectAddItemsToCart);
                   // }
-              
                 }}
               >
-                Add To Cart
+                Liên Hệ
               </Button>
 
               {/* <Button
