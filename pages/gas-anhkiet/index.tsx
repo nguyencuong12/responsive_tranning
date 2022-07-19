@@ -3,22 +3,23 @@ import { GasAnhKietAPI } from "../../axios/gasanhkiet";
 import ProductByCategory from "../../components/productbycategory";
 import { productInterface } from "../../utils/interfaces/product/productInterface";
 
-const ProductsPage = () => {
+const GasAnhKietPage = () => {
     const [products, setProducts] = useState<productInterface[]>();
     useEffect(() => {
+        console.log("GAS ANH KIET API");
         fetchProductsFromResponse();
     }, []);
 
     const fetchProductsFromResponse = async () => {
-        let response = await GasAnhKietAPI.fetchAllProductsInStore();
-        setProducts(response.data.products._productList);
+        let response = await GasAnhKietAPI.fetchGasAnhKiet();
+        setProducts(response.data.products);
     };
     return (
         <ProductByCategory
-            category="Tất cả sản phẩm có sẵn tại cửa hàng"
+            category="Các Sản Phẩm Gas Anh Kiệt"
             products={products!}
         ></ProductByCategory>
     );
 };
 
-export default ProductsPage;
+export default GasAnhKietPage;

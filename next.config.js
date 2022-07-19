@@ -15,7 +15,7 @@ const nextConfig = {
   },
   env: {
     // API_URL: "https://api.sashimeomeo.com",
-    API_URL: "http://localhost:5000",
+    API_URL: "http://api.sashimeomeo.com",
   },
 };
 

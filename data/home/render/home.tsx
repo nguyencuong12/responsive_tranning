@@ -77,6 +77,7 @@ export const HomeRender = {
                   width={70}
                   objectFit="cover"
                   alt="image"
+                  layout = "fixed"
                 ></Image>
                 <div className="title-policy">{element.title}</div>
                 <div className="subtitle-policy">{element.subTitle}</div>

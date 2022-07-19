@@ -13,14 +13,14 @@ import { cartItemsInterface } from "../../utils/interfaces/cart/cartItems";
 import { CartStorage } from "../../utils/cartStorage/cartStorage";
 const Wrapper = styled.div`
   /* border: 2px solid red; */
+ 
   height: 100%;
   position: relative;
-  width: 80%;
-  margin: 0 auto;
+
 `;
 const ProductItem = styled.div`
   position: relative;
-  padding: 10px;
+
 
   white-space: pre-line;
   .title {

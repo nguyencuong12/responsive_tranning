@@ -3,22 +3,22 @@ import { GasAnhKietAPI } from "../../axios/gasanhkiet";
 import ProductByCategory from "../../components/productbycategory";
 import { productInterface } from "../../utils/interfaces/product/productInterface";
 
-const ProductsPage = () => {
+const DayGasPage = () => {
     const [products, setProducts] = useState<productInterface[]>();
     useEffect(() => {
         fetchProductsFromResponse();
     }, []);
 
     const fetchProductsFromResponse = async () => {
-        let response = await GasAnhKietAPI.fetchAllProductsInStore();
-        setProducts(response.data.products._productList);
+        let response = await GasAnhKietAPI.fetchDayGas();
+        setProducts(response.data.products);
     };
     return (
         <ProductByCategory
-            category="Tất cả sản phẩm có sẵn tại cửa hàng"
+            category="Các Sản Phẩm Về Dây Gas"
             products={products!}
         ></ProductByCategory>
     );
 };
 
-export default ProductsPage;
+export default DayGasPage;
