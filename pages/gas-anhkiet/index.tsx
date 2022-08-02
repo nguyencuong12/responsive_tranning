@@ -1,3 +1,4 @@
+import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import { GasAnhKietAPI } from "../../axios/gasanhkiet";
 import ProductByCategory from "../../components/productbycategory";
@@ -15,10 +16,15 @@ const GasAnhKietPage = () => {
         setProducts(response.data.products);
     };
     return (
-        <ProductByCategory
-            category="Các Sản Phẩm Gas Anh Kiệt"
-            products={products!}
-        ></ProductByCategory>
+        <>
+            <Head>
+                <title>Gas anh kiệt</title>
+            </Head>
+            <ProductByCategory
+                category="Các Sản Phẩm Gas Anh Kiệt"
+                products={products!}
+            ></ProductByCategory>
+        </>
     );
 };
 

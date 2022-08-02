@@ -96,7 +96,7 @@ const CardProduct = (props: { product: productInterface }) => {
         >
             <CardProductImage>
                 <Image
-                    src={product.image[0].toString()}
+                    src={product.image[0].path.toString()}
                     height={300}
                     width={500}
                     alt="image"

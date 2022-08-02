@@ -1,9 +1,17 @@
+
+interface imageInterface{
+  id:string;
+  path:string;
+}
 export interface productInterface {
   _id?: string;
   name?: string;
   title?: string;
   price?: string;
-  image: string[];
+  image: [imageInterface];
+
+
+
   hashtag?: [];
   sale?: string;
   colors?: string[];

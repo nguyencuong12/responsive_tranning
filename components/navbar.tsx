@@ -23,6 +23,8 @@ import {
     Search,
     SearchOff,
     ShoppingCart,
+    ChevronDown,
+    CaretDown,
 } from "tabler-icons-react";
 import { useState } from "react";
 import { useViewportSize } from "@mantine/hooks";
@@ -191,7 +193,7 @@ const Navbar = () => {
                                         <Link href={element.href}>
                                             <a>{element.title}</a>
                                         </Link>
-                                        <ArrowDownCircle></ArrowDownCircle>
+                                        <CaretDown></CaretDown>
                                     </Group>
                                 }
                                 trigger="hover"

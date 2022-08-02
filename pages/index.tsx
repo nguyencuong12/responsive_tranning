@@ -37,10 +37,7 @@ const Wrapper = styled.div`
     /* height: 200vh; */
 `;
 
-const Banner = styled(Grid)`
-    padding: 10px;
-    height: auto;
-`;
+const Banner = styled(Grid)``;
 
 const Category = styled.div`
     height: auto;
@@ -481,7 +478,7 @@ const Home = () => {
                                     src="/gas-anhkiet/banner/banner-1.svg"
                                     layout="fill"
                                     alt="image"
-                                    objectFit="fill"
+                                    objectFit="cover"
                                 ></Image>
                             </SwiperSlide>
                             <SwiperSlide>
