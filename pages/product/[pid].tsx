@@ -23,6 +23,7 @@ import { cartItemsInterface } from "../../utils/interfaces/cart/cartItems";
 import { CartStorage } from "../../utils/cartStorage/cartStorage";
 import formatEvents from "../../utils/formatPrice/formatPrice";
 import Head from "next/head";
+import SeoComponent from "../../components/seo/seoComponent";
 const Wrapper = styled.div`
     /* border: 2px solid red; */
     padding-top: 80px;
@@ -155,14 +156,18 @@ const ProductPage = () => {
 
     return (
         <>
-            <Head>
+            {/* <Head>
                 <title>{product && product.title}</title>
                 <link rel="icon" href={product && product?.image[0].path.toString()} />
                 <meta property="og:title" content={product && product.title} />
-                <meta name="robots" content="all" />
+                <meta name="robots" content="noindex" />
                 <meta name="google" content="nositelinkssearchbox" key="sitelinks" />
                 <meta name="google" content="notranslate" key="notranslate" />
-            </Head>
+                <meta property="og:image"></meta>
+                <meta property="og:description"></meta>
+                <meta property="og:url"></meta>
+            </Head> */}
+            <SeoComponent />
             <Wrapper>
                 <Grid>
                     <Grid.Col md={6}>
