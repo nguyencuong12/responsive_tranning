@@ -16,8 +16,9 @@ const ServicesPage = () => {
                     width={100}
                     height={70}
                     layout="responsive"
+                    alt="Hình Ảnh Gas Anh Kiệt"
                     loader={() => {
-                        let result = "/gas-anhkiet/banner/banner-1.svg";
+                        let result = "/gas-anhkiuet/banner/banner-1.svg";
                         if (width <= 600) {
                             result = "/gas-anhkiet/banner/banner-1-mobile.svg";
                         }

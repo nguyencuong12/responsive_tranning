@@ -8,6 +8,7 @@ import { previewInterface } from "../../utils/interfaces/carousel/previewImage";
 import Image from "next/image";
 
 interface productImages {
+    title?: string;
     id: string;
     path: string;
 }
