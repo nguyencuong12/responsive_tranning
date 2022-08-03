@@ -156,18 +156,14 @@ const ProductPage = () => {
 
     return (
         <>
-            {/* <Head>
-                <title>{product && product.title}</title>
-                <link rel="icon" href={product && product?.image[0].path.toString()} />
-                <meta property="og:title" content={product && product.title} />
-                <meta name="robots" content="noindex" />
-                <meta name="google" content="nositelinkssearchbox" key="sitelinks" />
-                <meta name="google" content="notranslate" key="notranslate" />
-                <meta property="og:image"></meta>
-                <meta property="og:description"></meta>
-                <meta property="og:url"></meta>
-            </Head> */}
-            <SeoComponent />
+            <SeoComponent
+                title={product?.title!}
+                description={product?.description!}
+                iconRel={product?.image[0].path!}
+                ogDescription={product?.description!}
+                ogImage={product?.image[0].path!}
+                ogTitle={product?.title!}
+            />
             <Wrapper>
                 <Grid>
                     <Grid.Col md={6}>

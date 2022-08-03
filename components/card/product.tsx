@@ -87,7 +87,6 @@ const CardProductActions = styled.div``;
 const CardProduct = (props: { product: productInterface }) => {
     const { product } = props;
     const router = useRouter();
-    console.log("product", product);
     return (
         <Wrapper
             onClick={() => {
